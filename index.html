@@ -40,7 +40,7 @@
   <section data-screen-label="If you read one thing" style="max-width:720px; margin:0 auto; padding:56px 24px 0">
     <div style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-purple-70); margin-bottom:12px">If you read one thing</div>
     <p style="margin:0 0 16px; font-size:20px; line-height:28px; font-weight:500; text-wrap:pretty">People are starting to do their planning, research, and shopping inside ChatGPT and Gemini instead of a browser tab. The ask: can Fetch ride along — surfacing a relevant point or offer mid-conversation — without the user ever having to remember Fetch exists?</p>
-    <p style="margin:0; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)">That last clause is the whole constraint. It has to survive on a <strong style="color:var(--fetch-text-primary)">one-time setup</strong>, not something a user does per session, because "remember to invoke Fetch" is the exact problem we're trying to solve in the first place. Three ways to get there exist today; none of them are ready in the way we'd want, and the data on how often this would even matter is thinner than the idea deserves. This memo lays out the options, what's actually blocking each one, and the honest size of the opportunity — so leadership can decide whether this earns a real proposal or stays a "stay-ready" bet.</p>
+    <p style="margin:0; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)">That last clause is the whole constraint. It has to survive on a <strong style="color:var(--fetch-text-primary)">one-time setup</strong>, not something a user does per session, because "remember to invoke Fetch" is the exact problem we're trying to solve in the first place. Three ways to get there exist today; none of them are ready in the way we'd want, and the data on how often this would even matter is thinner than the idea deserves. This memo lays out the options, what's actually blocking each one, and the honest size of the opportunity — so you're working from real numbers instead of a vibe when you weigh whether this earns a real proposal or stays a "stay-ready" bet.</p>
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; margin-top:32px">
       <div style="background:var(--fetch-grey-5); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:8px">
         <div style="font-size:32px; line-height:40px; font-weight:800; color:var(--fetch-purple-70)">~9%</div>
@@ -243,7 +243,7 @@
   <section data-screen-label="07 Recommendation" style="max-width:720px; margin:0 auto; padding:64px 24px 72px">
     <div style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-text-tertiary); margin-bottom:8px">07</div>
     <h2 style="margin:0 0 16px; font-size:28px; line-height:36px; font-weight:800">The decision &amp; next steps</h2>
-    <p style="margin:0 0 20px; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)">This memo deliberately doesn't make the call — that's leadership's. Three questions, and where they point.</p>
+    <p style="margin:0 0 20px; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)">Here's my honest read: stay ready, don't spin up engineering yet — but that only holds if you'd answer these three questions the way I did. Try them yourself.</p>
     <div style="border:2px solid var(--fetch-purple-70); border-radius:16px; padding:24px; margin-bottom:24px; display:flex; flex-direction:column; gap:20px">
       <sc-for list="{{ decisionQs }}" as="q" hint-placeholder-count="3">
         <div style="display:flex; flex-direction:column; gap:8px">
@@ -256,7 +256,7 @@
         </div>
       </sc-for>
       <sc-if value="{{ noOutcome }}" hint-placeholder-val="{{ true }}">
-        <div style="font-size:14px; line-height:20px; color:var(--fetch-text-tertiary); border-top:1px solid var(--fetch-border-divider-secondary); padding-top:16px">Answer all three to see where it lands.</div>
+        <div style="font-size:14px; line-height:20px; color:var(--fetch-text-tertiary); border-top:1px solid var(--fetch-border-divider-secondary); padding-top:16px">Answer all three — I'll show you whether that matches my read or points somewhere else.</div>
       </sc-if>
       <sc-if value="{{ hasOutcome }}" hint-placeholder-val="{{ false }}">
         <div style="background:var(--fetch-purple-5); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:8px">
@@ -265,15 +265,15 @@
           <div style="font-size:14px; line-height:20px; color:var(--fetch-text-secondary)">{{ outcomeBody }}</div>
         </div>
       </sc-if>
-      <div style="font-size:12px; line-height:16px; color:var(--fetch-text-tertiary)">For reference: the room's own lean was "stay ready" — but that's an input, not the answer.</div>
+      <div style="font-size:12px; line-height:16px; color:var(--fetch-text-tertiary)">Push back on any of it — that's exactly what these questions are for.</div>
     </div>
-    <p style="margin:0 0 12px; font-size:14px; line-height:20px; font-weight:600; color:var(--fetch-text-secondary)">Whatever the call, three things held in the room:</p>
+    <p style="margin:0 0 12px; font-size:14px; line-height:20px; font-weight:600; color:var(--fetch-text-secondary)">Whichever way this goes, three things I'd hold onto regardless:</p>
     <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px">
       <div style="display:flex; gap:12px; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)"><span style="flex:none; color:var(--fetch-purple-70); font-weight:800">→</span><span>Don't chase the custom-system-instructions idea — the ask is too heavy for the conversion it would generate.</span></div>
       <div style="display:flex; gap:12px; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)"><span style="flex:none; color:var(--fetch-purple-70); font-weight:800">→</span><span>If anything ships near-term, scope a small <strong style="color:var(--fetch-text-primary)">Chrome extension</strong> spike — it's the only option that doesn't wait on someone else's timeline.</span></div>
       <div style="display:flex; gap:12px; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)"><span style="flex:none; color:var(--fetch-purple-70); font-weight:800">→</span><span>Revisit <strong style="color:var(--fetch-text-primary)">MCP / Apps marketplace</strong> once OpenAI confirms an actual date, or ships the discovery layer that would make it worth the setup cost.</span></div>
     </div>
-    <p style="margin:0 0 32px; font-size:16px; line-height:24px"><strong>The ask:</strong> <span style="color:var(--fetch-text-secondary)">green-light a deeper proposal and a strategy discussion, or hold until the offsite documentation and a conversation with the exec stakeholder have landed.</span></p>
+    <p style="margin:0 0 32px; font-size:16px; line-height:24px"><strong>The ask:</strong> <span style="color:var(--fetch-text-secondary)">if the read above tracks for you, green-light a deeper proposal and a strategy conversation. If you want more before that, the offsite docs and a conversation with the exec stakeholder should close the gap.</span></p>
     <div style="border:1px solid var(--fetch-border-card-secondary); border-radius:12px; overflow:hidden">
       <div style="display:grid; grid-template-columns:1fr 130px 110px; gap:0; background:var(--fetch-grey-5); padding:12px 20px; font-size:12px; line-height:16px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--fetch-text-tertiary)"><span>Action</span><span>Owner</span><span>Status</span></div>
       <div style="display:grid; grid-template-columns:1fr 130px 110px; padding:14px 20px; font-size:14px; line-height:20px; border-top:1px solid var(--fetch-border-divider-secondary); align-items:start"><span>Draft and circulate this one-pager</span><span style="color:var(--fetch-text-secondary)">Joshua</span><span style="font-weight:600; color:var(--fetch-green-70)">Done — this doc</span></div>
