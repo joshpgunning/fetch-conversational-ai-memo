@@ -1,0 +1,205 @@
+/* ==========================================================================
+   Fetch Design System — Icon Button
+   --------------------------------------------------------------------------
+   3 axes: type (primary | secondary | tertiary | transparent | icon)
+           × size (sm 32 | md 40 | lg 80)
+           × state (default | pressed | disabled | loading)
+   Always circular. Icon is centered. No label.
+   Use for compact actions: media controls, dismiss, like, share, fav, etc.
+   Tertiary uses an onSecondary shadow to read on light surfaces.
+   Transparent is for use over imagery / dark hero photos.
+   "Icon" type is chrome-less — the icon IS the button (e.g. inline play).
+   Requires colors_and_type.css.
+   ========================================================================== */
+
+.fetch-icon-btn {
+  --_bg: transparent; /* @kind other */
+  --_fg: #6B1CCF; /* @kind other */       /* brand purple — primary accent for this component */
+  --_bd: transparent; /* @kind other */
+  --_bd-width: 0; /* @kind other */
+  --_shadow: none; /* @kind other */
+
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0;
+  border: var(--_bd-width) solid var(--_bd);
+  border-radius: 9999px;
+  background: var(--_bg);
+  color: var(--_fg);
+  box-shadow: var(--_shadow);
+  cursor: pointer;
+  transition: background-color 120ms ease-out, color 120ms ease-out,
+              border-color 120ms ease-out, box-shadow 120ms ease-out,
+              transform 80ms ease-out;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.fetch-icon-btn:focus-visible {
+  outline: 2px solid var(--fetch-purple-70);
+  outline-offset: 2px;
+}
+
+.fetch-icon-btn:active:not(:disabled):not([aria-busy="true"]) {
+  transform: scale(0.96);
+}
+
+.fetch-icon-btn svg,
+.fetch-icon-btn .fetch-icon-btn__icon {
+  width: var(--_icon-size, 24px);
+  height: var(--_icon-size, 24px);
+  display: block;
+  color: currentColor;
+  fill: currentColor;
+}
+
+/* ---------- Sizes ------------------------------------------------------- */
+
+.fetch-icon-btn--sm { width: 32px; height: 32px; --_icon-size: 20px; }
+.fetch-icon-btn--md { width: 40px; height: 40px; --_icon-size: 24px; }
+.fetch-icon-btn--lg { width: 80px; height: 80px; --_icon-size: 44px; }
+
+/* "Icon" type fills the button bounds with the icon (no chrome) */
+.fetch-icon-btn--icon.fetch-icon-btn--sm { --_icon-size: 32px; }
+.fetch-icon-btn--icon.fetch-icon-btn--md { --_icon-size: 40px; }
+.fetch-icon-btn--icon.fetch-icon-btn--lg { --_icon-size: 80px; }
+
+/* ---------- PRIMARY ----------------------------------------------------- */
+
+.fetch-icon-btn--primary {
+  --_bg: #6B1CCF; /* @kind other */
+  --_fg: var(--fetch-grey-0); /* @kind other */
+}
+.fetch-icon-btn--primary:hover:not(:disabled):not([aria-busy="true"]) {
+  --_bg: #5E14B7; /* @kind other */
+}
+.fetch-icon-btn--primary:active:not(:disabled):not([aria-busy="true"]),
+.fetch-icon-btn--primary.is-pressed {
+  --_bg: #5000A0; /* @kind other */
+}
+.fetch-icon-btn--primary:disabled {
+  --_bg: var(--fetch-grey-30); /* @kind other */ /* #D8D6DB */
+  --_fg: var(--fetch-grey-50); /* @kind other */ /* #98949F */
+  cursor: not-allowed;
+}
+
+/* ---------- SECONDARY (outlined) --------------------------------------- */
+
+.fetch-icon-btn--secondary {
+  --_bg: transparent; /* @kind other */
+  --_fg: #6B1CCF; /* @kind other */
+  --_bd: #6B1CCF; /* @kind other */
+  --_bd-width: 1px; /* @kind other */
+}
+.fetch-icon-btn--secondary:hover:not(:disabled):not([aria-busy="true"]) {
+  --_bg: #FBF9FF; /* @kind other */
+}
+.fetch-icon-btn--secondary:active:not(:disabled):not([aria-busy="true"]),
+.fetch-icon-btn--secondary.is-pressed {
+  --_bg: #FBF9FF; /* @kind other */
+  --_fg: #5000A0; /* @kind other */
+  --_bd: #5000A0; /* @kind other */
+}
+.fetch-icon-btn--secondary:disabled {
+  --_bg: transparent; /* @kind other */
+  --_fg: var(--fetch-grey-50); /* @kind other */
+  --_bd: var(--fetch-grey-50); /* @kind other */
+  cursor: not-allowed;
+}
+
+/* ---------- TERTIARY (white pill, soft shadow) ------------------------- */
+
+.fetch-icon-btn--tertiary {
+  --_bg: var(--fetch-grey-0); /* @kind other */
+  --_fg: var(--fetch-grey-100); /* @kind other */ /* #302D3E */
+  --_shadow: 0 2px 10px rgba(60, 51, 83, 0.08), 0 0 2px rgba(60, 51, 83, 0.04); /* @kind other */
+}
+.fetch-icon-btn--tertiary:hover:not(:disabled):not([aria-busy="true"]) {
+  --_bg: #FBF9FF; /* @kind other */
+  --_fg: #5000A0; /* @kind other */
+}
+.fetch-icon-btn--tertiary:active:not(:disabled):not([aria-busy="true"]),
+.fetch-icon-btn--tertiary.is-pressed {
+  --_bg: #FBF9FF; /* @kind other */
+  --_fg: #5000A0; /* @kind other */
+}
+.fetch-icon-btn--tertiary:disabled {
+  --_bg: var(--fetch-grey-30); /* @kind other */
+  --_fg: var(--fetch-grey-50); /* @kind other */
+  --_shadow: none; /* @kind other */
+  cursor: not-allowed;
+}
+
+/* ---------- TRANSPARENT (over media) ----------------------------------- */
+
+.fetch-icon-btn--transparent {
+  --_bg: rgba(48, 45, 62, 0.7); /* @kind other */ /* grey-100 @ 70% */
+  --_fg: var(--fetch-grey-0); /* @kind other */
+}
+.fetch-icon-btn--transparent:hover:not(:disabled):not([aria-busy="true"]) {
+  --_bg: rgba(48, 45, 62, 0.8); /* @kind other */
+}
+.fetch-icon-btn--transparent:active:not(:disabled):not([aria-busy="true"]),
+.fetch-icon-btn--transparent.is-pressed {
+  --_bg: rgba(48, 45, 62, 0.9); /* @kind other */
+}
+.fetch-icon-btn--transparent:disabled {
+  --_bg: var(--fetch-grey-30); /* @kind other */
+  --_fg: var(--fetch-grey-50); /* @kind other */
+  cursor: not-allowed;
+}
+
+/* ---------- ICON (chrome-less) ----------------------------------------- */
+
+.fetch-icon-btn--icon {
+  --_bg: transparent; /* @kind other */
+  --_fg: #6B1CCF; /* @kind other */
+  --_bd-width: 0; /* @kind other */
+}
+.fetch-icon-btn--icon:hover:not(:disabled):not([aria-busy="true"]) {
+  --_fg: #5E14B7; /* @kind other */
+}
+.fetch-icon-btn--icon:active:not(:disabled):not([aria-busy="true"]),
+.fetch-icon-btn--icon.is-pressed {
+  --_fg: #5000A0; /* @kind other */
+}
+.fetch-icon-btn--icon:disabled {
+  --_fg: var(--fetch-grey-50); /* @kind other */
+  cursor: not-allowed;
+}
+
+/* ---------- Loading ----------------------------------------------------- */
+
+.fetch-icon-btn[aria-busy="true"] {
+  cursor: progress;
+}
+.fetch-icon-btn[aria-busy="true"] svg,
+.fetch-icon-btn[aria-busy="true"] .fetch-icon-btn__icon { display: none; }
+
+/* Spinner — matches the Button component (border ring with transparent top) */
+.fetch-icon-btn__spinner {
+  width: var(--_spinner-size, 20px);
+  height: var(--_spinner-size, 20px);
+  flex-shrink: 0;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: fetch-icon-btn-spin 700ms linear infinite;
+}
+
+.fetch-icon-btn--sm .fetch-icon-btn__spinner { --_spinner-size: 16px; }
+.fetch-icon-btn--md .fetch-icon-btn__spinner { --_spinner-size: 20px; }
+.fetch-icon-btn--lg .fetch-icon-btn__spinner { --_spinner-size: 40px; }
+.fetch-icon-btn--icon.fetch-icon-btn--sm .fetch-icon-btn__spinner { --_spinner-size: 20px; }
+.fetch-icon-btn--icon.fetch-icon-btn--md .fetch-icon-btn__spinner { --_spinner-size: 24px; }
+.fetch-icon-btn--icon.fetch-icon-btn--lg .fetch-icon-btn__spinner { --_spinner-size: 56px; }
+
+/* Spinner inherits color via currentColor from each type's --_fg */
+
+@keyframes fetch-icon-btn-spin {
+  to { transform: rotate(360deg); }
+}

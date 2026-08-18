@@ -1,0 +1,41 @@
+/* ==========================================================================
+   Fetch Design System — Header
+   --------------------------------------------------------------------------
+   Title (left, flex-grow) + Chips cluster (right, Play → Points)
+   Content row 56px, padding 4px 16px 16px, gap 8.
+   ========================================================================== */
+
+.fetch-header {
+  background: var(--fetch-surface-bg-primary);
+  font-family: var(--fetch-font-sans);
+}
+
+.fetch-header__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 56px;
+  padding: 4px 16px 16px;
+  box-sizing: border-box;
+}
+
+.fetch-header__title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: var(--fetch-fw-semibold);
+  color: var(--fetch-text-primary);
+  letter-spacing: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fetch-header__chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  flex-shrink: 0;
+}

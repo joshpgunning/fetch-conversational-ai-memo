@@ -1,0 +1,136 @@
+/* ==========================================================================
+   Fetch Design System — Shelf
+   --------------------------------------------------------------------------
+   A titled horizontal rail that houses offer cards (flat or small).
+
+   Anatomy:
+     .fetch-shelf
+       .fetch-shelf__header   — 28h: title + (optional) action button
+         .fetch-shelf__title         — Sans 16/24 Strong, #302D3E
+         .fetch-shelf__subheading    — Rubik 14/20 Medium, secondary (optional)
+         .fetch-shelf__action        — purple "See more" button
+       .fetch-shelf__rail     — horizontally scrolling track of cards
+
+   Spacing
+     - Header padding: 0 8 0 16 (per spec)
+     - Header → rail gap: 16px
+     - Card → card gap: 8px
+     - Rail uses 16px lead-in / trail-out padding so cards align with title
+       and bleed cleanly off the right edge.
+   ========================================================================== */
+
+.fetch-shelf {
+  width: 100%;
+  font-family: var(--fetch-font-sans);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ---------- Header ------------------------------------------------------ */
+.fetch-shelf__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 8px 0 16px;
+  gap: 8px;
+  height: 28px;
+  align-self: stretch;
+}
+
+/* Title block — flex-grow:1 so the action sits flush to the right edge */
+.fetch-shelf__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0;
+}
+
+.fetch-shelf__title {
+  margin: 0;
+  font-family: var(--fetch-font-sans);
+  font-style: normal;
+  font-weight: var(--fetch-fw-semibold, 600);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--fetch-text-primary, #302D3E);
+  letter-spacing: 0;
+  align-self: stretch;
+  /* Single-line, ellipsised so a long title doesn't push the action off-screen */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Subheading — hidden by default; opt in with data-subheading="true" */
+.fetch-shelf__subheading {
+  display: none;
+  margin: 0;
+  font-family: var(--fetch-font-rubik, 'Rubik'), var(--fetch-font-sans);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px; /* 140% */
+  letter-spacing: -0.005em;
+  font-feature-settings: 'ss02' on, 'liga' off;
+  color: var(--fetch-text-secondary, #6D667E);
+  align-self: stretch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fetch-shelf[data-subheading="true"] .fetch-shelf__subheading { display: block; }
+.fetch-shelf[data-subheading="true"] .fetch-shelf__header { height: auto; min-height: 28px; }
+
+/* Action button (e.g. "See more") — text-only, link color (blurple-70) */
+.fetch-shelf__action {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  height: 28px;
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--fetch-font-sans);
+  font-style: normal;
+  font-weight: var(--fetch-fw-semibold, 600);
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: var(--fetch-text-link);
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 6px;
+}
+.fetch-shelf__action:hover { background: rgba(122, 69, 255, 0.06); }
+.fetch-shelf__action:active { background: rgba(122, 69, 255, 0.12); }
+.fetch-shelf__action:disabled {
+  color: var(--fetch-text-tertiary, #9B98A6);
+  cursor: not-allowed;
+  background: transparent;
+}
+
+/* ---------- Rail -------------------------------------------------------- */
+.fetch-shelf__rail {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 16px 4px; /* 4 bottom for shadow breathing room on small cards */
+  scroll-padding-left: 16px; /* keep first item flush w/ header text on snap */
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.fetch-shelf__rail::-webkit-scrollbar { display: none; }
+
+.fetch-shelf__rail > * {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}

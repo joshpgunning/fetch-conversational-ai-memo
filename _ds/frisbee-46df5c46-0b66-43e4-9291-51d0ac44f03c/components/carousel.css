@@ -1,0 +1,73 @@
+/* ==========================================================================
+   Fetch Design System — Carousel
+   --------------------------------------------------------------------------
+   A horizontally-scrolling rail of full-bleed promotional slides.
+
+   Anatomy
+     .fetch-carousel              — the scrolling track
+       .fetch-carousel__slide     — 268×132 rounded card with a background image
+
+   Spec
+     - Container: 393w × 132h, flex row, padding 0 16, gap 12, overflow-x scroll
+     - Slide:     268w × 132h, radius 8, onPrimary shadow
+     - Slides bleed off the right edge; the next slide peeks (~109px on a 393w
+       screen) to telegraph that the rail scrolls.
+
+   Slide content
+     The 1072×528 (or 1056×528) artwork PNGs are designed to be used full-bleed
+     as the slide background — they already contain all foreground composition.
+     Just drop the path into `--bg`.
+
+   Usage
+     <div class="fetch-carousel" role="region" aria-label="Promotions">
+       <a class="fetch-carousel__slide" style="--bg: url(../assets/carousel/foo.png)" href="#"></a>
+       …
+     </div>
+   ========================================================================== */
+
+.fetch-carousel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  width: 100%;
+  /* When placed in a 393px-wide phone canvas the spec'd width matches; when
+     wider, the rail still scrolls because slides have fixed width. */
+  height: 132px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 16px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  box-sizing: border-box;
+}
+.fetch-carousel::-webkit-scrollbar { display: none; }
+
+/* ---------- Slide ------------------------------------------------------- */
+.fetch-carousel__slide {
+  display: block;
+  flex: 0 0 auto;
+  width: 268px;
+  height: 132px;
+  border-radius: 8px;
+  background-color: var(--fetch-grey-5, #F2F1F4);
+  background-image: var(--bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Shadow 2 — design system token */
+  box-shadow: var(--fetch-shadow-2);
+  scroll-snap-align: start;
+  text-decoration: none;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+.fetch-carousel__slide:active { transform: scale(0.985); }
+.fetch-carousel__slide:focus-visible {
+  outline: 2px solid var(--fetch-purple-70, #6B1CCF);
+  outline-offset: 3px;
+}

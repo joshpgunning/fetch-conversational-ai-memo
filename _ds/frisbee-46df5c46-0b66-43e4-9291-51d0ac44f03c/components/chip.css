@@ -1,0 +1,143 @@
+/* ==========================================================================
+   Fetch Design System — Chip
+   --------------------------------------------------------------------------
+   Type: Standard (Default | Selected) | Points | Play
+   Height 36px fixed, pill radius, min-width 48px.
+   ========================================================================== */
+
+.fetch-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  min-width: 48px;
+  border-radius: 999px;
+  box-sizing: border-box;
+  font-family: var(--fetch-font-sans);
+  color: var(--fetch-text-primary);
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  background: transparent;
+  border: 0;
+}
+
+/* ---------- Standard ----------------------------------------------------- */
+.fetch-chip--standard {
+  padding: 10px 12px;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: var(--fetch-fw-regular);
+  background: var(--fetch-surface-bg-primary);
+  border: 1px solid rgba(48, 45, 62, 0.2); /* tblack/20 — Figma spec */
+  cursor: pointer;
+  justify-content: center;
+  text-align: center;
+}
+.fetch-chip--standard[aria-pressed="true"],
+.fetch-chip--standard.is-selected {
+  /* Orange/core (#FFA900) → Red/core (#F23030) gradient stroke,
+     2px inner border, with Orange/10 (#FCF4D7) fill.
+     Two-layer background trick: padding-box for fill, border-box for the
+     gradient, applied through a transparent border. */
+  background:
+    linear-gradient(var(--fetch-orange-10), var(--fetch-orange-10)) padding-box,
+    linear-gradient(90deg, var(--fetch-orange-40) 0%, var(--fetch-red-60) 100%) border-box;
+  border: 2px solid transparent;
+}
+.fetch-chip--standard .fetch-chip__count {
+  font-weight: var(--fetch-fw-semibold);
+}
+.fetch-chip--standard .fetch-chip__icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.fetch-chip--standard:focus-visible {
+  outline: 2px solid var(--fetch-purple-70);
+  outline-offset: 2px;
+}
+
+/* ---------- Points ------------------------------------------------------- */
+.fetch-chip--points {
+  padding: 4px 12px;
+  gap: 4px;
+  background: var(--fetch-orange-10);
+  border: 0;
+  font-weight: var(--fetch-fw-bold);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.025em;
+}
+.fetch-chip--points .fetch-chip__coin {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.fetch-chip--points .fetch-chip__points-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* ---------- Like -------------------------------------------------------- */
+/* Compact heart + count chip. Default has white fill with pink-20 border;
+   selected has soft pink (#FEF3F6) fill with pink-50 border.
+   Uses the multicolor heart asset (stays the same in both states). */
+.fetch-chip--like {
+  padding: 10px 12px;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: var(--fetch-fw-semibold);
+  background: var(--fetch-surface-bg-primary);
+  border: 1.5px solid var(--fetch-pink-20, #FFD1E5);
+  cursor: pointer;
+  justify-content: center;
+  text-align: center;
+  color: var(--fetch-text-primary);
+}
+/* Large variant — matches 44px search-bar height with 12px horizontal padding.
+   Used in search rows and other places where the chip sits next to a 44h field. */
+.fetch-chip.fetch-chip--lg.fetch-chip--like {
+  height: 44px;
+  padding: 12px;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.fetch-chip--like.fetch-chip--lg .fetch-chip__heart {
+  width: 20px;
+  height: 20px;
+}
+.fetch-chip--like .fetch-chip__heart {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: block;
+}
+.fetch-chip--like[aria-pressed="true"],
+.fetch-chip--like.is-selected {
+  background: #FEF3F6;
+  border-color: var(--fetch-pink-50, #FF57AC);
+}
+.fetch-chip--like:focus-visible {
+  outline: 2px solid var(--fetch-purple-70);
+  outline-offset: 2px;
+}
+
+/* ---------- Play --------------------------------------------------------- */
+.fetch-chip--play {
+  padding: 4px 12px 4px 4px;
+  gap: 4px;
+  background: var(--fetch-blue-10);
+  border: 0;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: var(--fetch-fw-semibold);
+}
+.fetch-chip--play .fetch-chip__joystick {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}

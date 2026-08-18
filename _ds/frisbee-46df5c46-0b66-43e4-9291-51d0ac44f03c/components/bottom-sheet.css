@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Fetch Design System — Bottom Sheet
+   --------------------------------------------------------------------------
+   Modal sheet that slides up from the bottom over a scrim.
+   Drag handle, optional 1:1 image slot, title, description, 0/1/2 actions.
+   ========================================================================== */
+
+.fetch-sheet-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--fetch-surface-scrim, rgba(48, 45, 62, 0.6));
+  z-index: 40;
+}
+
+.fetch-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--fetch-surface-bg-primary);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  padding: 8px 24px 24px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  font-family: var(--fetch-font-sans);
+  box-shadow: 0 -8px 24px rgba(48, 45, 62, 0.12);
+  box-sizing: border-box;
+}
+
+/* Drag handle */
+.fetch-sheet__handle {
+  width: 36px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--fetch-grey-30);
+  margin: 0 auto 16px;
+  flex-shrink: 0;
+}
+
+/* Optional 1:1 image — square by default; consumer can override border-radius */
+.fetch-sheet__image {
+  width: 160px;
+  height: 160px;
+  align-self: center;
+  border-radius: 0;
+  background: var(--fetch-grey-10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0 24px;
+  overflow: hidden;
+  color: var(--fetch-text-primary);
+  font-weight: var(--fetch-fw-semibold);
+  font-size: 16px;
+}
+.fetch-sheet__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Title — Sans Medium 20 Strong */
+.fetch-sheet__title {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: var(--fetch-fw-bold, 700);
+  color: var(--fetch-text-primary);
+  text-align: center;
+  margin: 0 0 8px;
+  letter-spacing: -0.005em;
+  text-transform: none;
+}
+
+/* Description — Sans Base 16 */
+.fetch-sheet__desc {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: var(--fetch-fw-regular, 400);
+  color: var(--fetch-text-secondary);
+  text-align: center;
+  margin: 0 0 24px;
+  text-wrap: pretty;
+}
+
+/* Action stack — full-width buttons */
+.fetch-sheet__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+.fetch-sheet__actions:empty {
+  display: none;
+  margin: 0;
+}
+.fetch-sheet__actions .fetch-btn {
+  width: 100%;
+}

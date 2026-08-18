@@ -1,0 +1,89 @@
+/* ==========================================================================
+   Fetch Design System — Checkbox
+   --------------------------------------------------------------------------
+   Axes: selected (true | false) × state (default | disabled)
+   20×20 box, 4px radius, 8px gap to label.
+   ========================================================================== */
+
+.fetch-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fetch-font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: var(--fetch-fw-semibold);
+  color: var(--fetch-text-primary);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fetch-check__input {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.fetch-check__box {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: transparent;
+  border: 1px solid var(--fetch-purple-70); /* #A408C7 */
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 120ms ease-out, border-color 120ms ease-out;
+}
+
+.fetch-check__check {
+  width: 16px;
+  height: 16px;
+  color: var(--fetch-grey-0);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 120ms ease-out, transform 120ms ease-out;
+}
+
+/* Selected (via :checked OR data-selected for static demo) */
+.fetch-check__input:checked + .fetch-check__box,
+.fetch-check[data-selected="true"] .fetch-check__box {
+  background: var(--fetch-purple-70);
+  border-color: var(--fetch-purple-70);
+}
+.fetch-check__input:checked + .fetch-check__box .fetch-check__check,
+.fetch-check[data-selected="true"] .fetch-check__check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Focus */
+.fetch-check__input:focus-visible + .fetch-check__box {
+  outline: 2px solid var(--fetch-purple-70);
+  outline-offset: 2px;
+}
+
+/* Disabled */
+.fetch-check[data-disabled="true"],
+.fetch-check:has(.fetch-check__input:disabled) {
+  cursor: not-allowed;
+  color: var(--fetch-tblack-a50); /* Text Tertiary */
+}
+.fetch-check[data-disabled="true"] .fetch-check__box,
+.fetch-check:has(.fetch-check__input:disabled) .fetch-check__box {
+  background: transparent;
+  border-color: var(--fetch-grey-30);
+}
+.fetch-check[data-disabled="true"][data-selected="true"] .fetch-check__box,
+.fetch-check:has(.fetch-check__input:disabled:checked) .fetch-check__box {
+  background: var(--fetch-grey-30);
+  border-color: transparent;
+}

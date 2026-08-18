@@ -1,0 +1,176 @@
+/* ==========================================================================
+   Fetch Design System — Reactions
+   --------------------------------------------------------------------------
+   Heart button + overlapping avatar stack + count.
+   Used standalone (e.g. in offer-card --large footer) anywhere a piece of
+   content needs a "saved by N people" cluster.
+
+   Class: .fetch-reactions  (modifiers: --sm / --md / --lg)
+            .fetch-reactions[data-liked="true"]    → filled pink heart
+            .fetch-reactions[data-liked="false"]   → grey stroke heart (default)
+
+   Markup:
+     <button class="fetch-reactions fetch-reactions--md" data-liked="false">
+       <span class="fetch-reactions__heart" aria-hidden="true"></span>
+       <span class="fetch-reactions__avatars">
+         <span class="fetch-reactions__avatar"><img src="…" alt=""></span>
+         <span class="fetch-reactions__avatar"><img src="…" alt=""></span>
+       </span>
+       <span class="fetch-reactions__count">144</span>
+     </button>
+
+   Sizes (heart / avatar / text):
+     --sm   24 / 20 / 12
+     --md   30 / 24 / 12
+     --lg   38 / 32 / 16
+   ========================================================================== */
+
+.fetch-reactions {
+  --_rx-heart: 24px; /* @kind other */
+  --_rx-avatar: 20px; /* @kind other */
+  --_rx-ring: 2px; /* @kind other */
+  --_rx-overlap: 4px; /* @kind other */
+  --_rx-text-size: 12px; /* @kind other */
+  --_rx-text-line: 16px; /* @kind other */
+  --_rx-text-weight: var(--fetch-fw-semibold, 600); /* @kind other */
+  --_rx-heart-stroke: rgba(48, 45, 62, 0.5); /* @kind other */
+  --_rx-heart-fill: var(--fetch-pink-50, #FF57AC); /* @kind other */
+
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--fetch-font-sans);
+  color: var(--fetch-text-primary, #302D3E);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Sizes ----------------------------------------------------------------- */
+.fetch-reactions--sm {
+  --_rx-heart: 24px; /* @kind other */
+  --_rx-avatar: 20px; /* @kind other */
+  --_rx-overlap: 4px; /* @kind other */
+  --_rx-text-size: 12px; /* @kind other */
+  --_rx-text-line: 16px; /* @kind other */
+}
+.fetch-reactions--md {
+  --_rx-heart: 30px; /* @kind other */
+  --_rx-avatar: 24px; /* @kind other */
+  --_rx-overlap: 4px; /* @kind other */
+  --_rx-text-size: 12px; /* @kind other */
+  --_rx-text-line: 16px; /* @kind other */
+}
+.fetch-reactions--lg {
+  --_rx-heart: 38px; /* @kind other */
+  --_rx-avatar: 32px; /* @kind other */
+  --_rx-overlap: 4px; /* @kind other */
+  --_rx-text-size: 16px; /* @kind other */
+  --_rx-text-line: 24px; /* @kind other */
+}
+
+/* Heart ----------------------------------------------------------------- */
+.fetch-reactions__heart {
+  width: var(--_rx-heart);
+  height: var(--_rx-heart);
+  flex-shrink: 0;
+  display: inline-block;
+  background: var(--_rx-heart-stroke);
+  -webkit-mask: url("../assets/icons/like-stroke.svg") center / 83.3% no-repeat;
+          mask: url("../assets/icons/like-stroke.svg") center / 83.3% no-repeat;
+}
+/* Liked: swap to the multi-color filled SVG so we keep the gradient highlight
+   from the source asset (rather than a flat pink mask). */
+.fetch-reactions[data-liked="true"] .fetch-reactions__heart {
+  background: transparent;
+  -webkit-mask: none;
+          mask: none;
+  background-image: url("../assets/icons/like-fill.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 83.3%;
+}
+
+/* Avatars --------------------------------------------------------------- */
+.fetch-reactions__avatars {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  flex-shrink: 0;
+}
+.fetch-reactions__avatar {
+  position: relative;
+  width: var(--_rx-avatar);
+  height: var(--_rx-avatar);
+  border-radius: 50%;
+  border: var(--_rx-ring) solid var(--fetch-surface-bg-primary, #fff);
+  background: var(--fetch-grey-30, #C9C8CC);
+  overflow: hidden;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+.fetch-reactions__avatar + .fetch-reactions__avatar {
+  margin-left: calc(var(--_rx-overlap) * -1);
+}
+.fetch-reactions__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Count ----------------------------------------------------------------- */
+/* Outer label sets typography and acts as a flex row for per-char rollers. */
+.fetch-reactions__count {
+  font-family: var(--fetch-font-sans);
+  font-size: var(--_rx-text-size);
+  line-height: var(--_rx-text-line);
+  font-weight: var(--_rx-text-weight);
+  color: var(--fetch-text-primary, #302D3E);
+  letter-spacing: 0;
+  white-space: nowrap;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: flex-start;
+  height: var(--_rx-text-line);
+  vertical-align: top;
+}
+/* Each character lives in its own viewport so digits roll independently. */
+.fetch-reactions__count-char {
+  position: relative;
+  display: inline-block;
+  height: var(--_rx-text-line);
+  overflow: hidden;
+  vertical-align: top;
+}
+.fetch-reactions__count-track {
+  display: flex;
+  flex-direction: column;
+  /* Top slot = unliked, bottom slot = liked.
+     Default (unliked): track at translateY(0), unliked slot visible.
+     On like: track translates up by one line, liked slot slides up into
+     view, unliked exits upward. */
+  transform: translateY(0);
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.fetch-reactions__count-slot {
+  display: block;
+  height: var(--_rx-text-line);
+  line-height: var(--_rx-text-line);
+}
+/* Only chars whose value actually changes between unliked → liked roll. */
+.fetch-reactions[data-liked="true"] .fetch-reactions__count-char--changes .fetch-reactions__count-track {
+  transform: translateY(calc(var(--_rx-text-line) * -1));
+}
+@media (prefers-reduced-motion: reduce) {
+  .fetch-reactions__count-track { transition: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fetch-reactions__count-track { transition: none; }
+}

@@ -1,0 +1,223 @@
+/* ==========================================================================
+   Fetch Design System — Bottom Navigation
+   --------------------------------------------------------------------------
+   Total height 86px (72px bar + 14px FAB overhang). 4 tabs at 14px from top,
+   raised central Scan FAB inside a 62px white halo. eReceipt badge sits at
+   the FAB's bottom-right (offset per Figma).
+
+   Geometry (Figma frame 393×86):
+     Bar:       393 × 72, anchored to bottom
+     White halo (62×62) — bottom: 24  → top: 0
+     FAB        (52×52) — bottom: 29  → top: 5
+     Camera    (32×32)  — bottom: 39  → top: 15  (centered in FAB)
+     Badge     (20×20)  — bottom: 25, +19.5px right of center → top: 41
+   ========================================================================== */
+
+.fetch-bottomnav {
+  position: relative;
+  width: 393px;
+  height: 86px;
+  font-family: var(--fetch-font-sans);
+}
+
+/* The bar sits at the bottom of the 86h container. */
+.fetch-bottomnav__bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72px;
+  background: var(--fetch-surface-bg-primary);
+  box-shadow: var(--fetch-shadow-2);
+}
+
+/* Safe-area extension below the bar (home indicator zone). */
+.fetch-bottomnav__bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: var(--fetch-bottomnav-safe, 28px);
+  background: var(--fetch-surface-bg-primary);
+}
+
+/* ---------- Tabs --------------------------------------------------------- */
+.fetch-bottomnav__tabs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* tabs themselves re-enable */
+}
+
+.fetch-bottomnav__tab {
+  position: absolute;
+  top: 14px;
+  height: 44px;
+  width: 19.2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  color: var(--fetch-tblack-a50); /* inactive */
+  -webkit-tap-highlight-color: transparent;
+}
+/* Inactive tab color — use icon-tertiary token */
+.fetch-bottomnav__tab {
+  color: var(--fetch-icon-tertiary);
+}
+.fetch-bottomnav__tab[aria-current="page"],
+.fetch-bottomnav__tab.is-active {
+  color: var(--fetch-icon-primary);
+}
+.fetch-bottomnav__tab[data-pos="home"]    { left: 2.13%; }
+.fetch-bottomnav__tab[data-pos="shop"]    { left: 21.33%; }
+.fetch-bottomnav__tab[data-pos="play"]    { right: 21.33%; }
+.fetch-bottomnav__tab[data-pos="profile"] { right: 2.13%; }
+
+.fetch-bottomnav__tab svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+/* Tab icons rendered as <img> — mask them so they recolor via `currentColor`.
+   Use `data-icon="<filename-without-extension>"` to drive the mask. */
+.fetch-bottomnav__tab[data-icon] {
+  /* allow the masked element to fill */
+}
+.fetch-bottomnav__tab[data-icon]::before {
+  content: "";
+  width: 28px;
+  height: 28px;
+  background: currentColor;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 28px 28px;
+          mask-size: 28px 28px;
+  display: block;
+}
+.fetch-bottomnav__tab[data-icon="home-fill"]::before          { -webkit-mask-image: url("../assets/icons/home-fill.svg");          mask-image: url("../assets/icons/home-fill.svg"); }
+.fetch-bottomnav__tab[data-icon="home-stroke"]::before        { -webkit-mask-image: url("../assets/icons/home-stroke.svg");        mask-image: url("../assets/icons/home-stroke.svg"); }
+.fetch-bottomnav__tab[data-icon="storefront-fill"]::before    { -webkit-mask-image: url("../assets/icons/storefront-fill.svg");    mask-image: url("../assets/icons/storefront-fill.svg"); }
+.fetch-bottomnav__tab[data-icon="storefront-stroke"]::before  { -webkit-mask-image: url("../assets/icons/storefront-stroke.svg");  mask-image: url("../assets/icons/storefront-stroke.svg"); }
+.fetch-bottomnav__tab[data-icon="trophy-fill"]::before        { -webkit-mask-image: url("../assets/icons/trophy-fill.svg");        mask-image: url("../assets/icons/trophy-fill.svg"); }
+.fetch-bottomnav__tab[data-icon="trophy-stroke"]::before      { -webkit-mask-image: url("../assets/icons/trophy-stroke.svg");      mask-image: url("../assets/icons/trophy-stroke.svg"); }
+.fetch-bottomnav__tab[data-icon="joystick-fill"]::before      { -webkit-mask-image: url("../assets/icons/joystick-fill.svg");      mask-image: url("../assets/icons/joystick-fill.svg"); }
+.fetch-bottomnav__tab[data-icon="joystick-stroke"]::before    { -webkit-mask-image: url("../assets/icons/joystick-stroke.svg");    mask-image: url("../assets/icons/joystick-stroke.svg"); }
+.fetch-bottomnav__tab[data-icon="user-circle-fill"]::before   { -webkit-mask-image: url("../assets/icons/user-circle-fill.svg");   mask-image: url("../assets/icons/user-circle-fill.svg"); }
+.fetch-bottomnav__tab[data-icon="user-circle-stroke"]::before { -webkit-mask-image: url("../assets/icons/user-circle-stroke.svg"); mask-image: url("../assets/icons/user-circle-stroke.svg"); }
+
+/* Avatar tab variant — photo fills a 22×22 disc with a 2px white gap and
+   an outer 2.33px stroke ring (28×28 outer). The stroke is icon-tertiary
+   when unselected and icon-primary when selected.
+   Markup:
+     <button class="fetch-bottomnav__tab fetch-bottomnav__tab--avatar" data-pos="profile">
+       <span class="fetch-avatar"><img src="..."></span>
+     </button>
+   When data-icon is also present, the masked icon renders underneath the
+   avatar as a fallback if the photo fails. */
+.fetch-bottomnav__tab--avatar { position: absolute; }
+.fetch-bottomnav__tab--avatar .fetch-avatar {
+  width: 22px;
+  height: 22px;
+  --_avatar-size: 22px; /* @kind other */
+  position: relative;
+  z-index: 1;
+  background: var(--fetch-grey-20);
+  /* white gap between photo and outer stroke */
+  box-shadow: 0 0 0 2px var(--fetch-surface-bg-primary);
+}
+/* 28×28 outer stroke ring */
+.fetch-bottomnav__tab--avatar::after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  left: calc(50% - 14px);
+  top: calc(50% - 14px);
+  border-radius: 50%;
+  border: 2.33px solid var(--fetch-icon-tertiary);
+  box-sizing: border-box;
+  pointer-events: none;
+  z-index: 2;
+}
+.fetch-bottomnav__tab--avatar[aria-current="page"]::after,
+.fetch-bottomnav__tab--avatar.is-active::after {
+  border-color: var(--fetch-icon-primary);
+}
+/* When data-icon is also set, the ::before mask becomes the FALLBACK icon
+   rendered underneath the avatar (visible if the photo is missing). */
+.fetch-bottomnav__tab--avatar[data-icon]::before {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+
+/* ---------- Scan FAB -----------------------------------------------------
+   White halo (62×62, top:0) wraps the orange FAB (52×52, top:5).
+   Both are centered horizontally (with the 0.5px Figma fudge). */
+.fetch-bottomnav__scan-wrap {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 31px + 0.5px);
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: var(--fetch-surface-bg-primary);
+  pointer-events: none;
+}
+
+.fetch-bottomnav__scan {
+  position: absolute;
+  top: 5px;
+  left: calc(50% - 26px + 0.5px);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 0;
+  background: linear-gradient(241.5deg, #FEB200 24.27%, #FD9500 58.71%, #FC8700 84.15%);
+  color: var(--fetch-grey-0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.fetch-bottomnav__scan svg {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+/* eReceipt-ready badge — 20×20 at top:41, centered + 19.5px to the right. */
+.fetch-bottomnav__badge {
+  position: absolute;
+  top: 41px;
+  left: calc(50% - 10px + 19.5px);
+  width: 20px;
+  height: 20px;
+  border-radius: 80px;
+  background: linear-gradient(241.5deg, #4673E5 24.27%, #464CE5 58.71%, #4F46E5 84.15%);
+  color: var(--fetch-grey-0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  box-shadow: 0 1px 2px rgba(37, 26, 107, 0.25);
+}
+.fetch-bottomnav__badge svg {
+  width: 12px;
+  height: 12px;
+  display: block;
+}

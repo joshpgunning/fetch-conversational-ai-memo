@@ -1,0 +1,172 @@
+/* ==========================================================================
+   Fetch Design System — Dropdown
+   --------------------------------------------------------------------------
+   Axes: type (empty | active | filled) × state (default | disabled | warning | error).
+   Field 48h, 6/16 padding, 8 radius, 1px border. Chevron-down (closed) /
+   chevron-up (active/open). Helper row appears on warning + error.
+
+     <div class="fetch-dropdown" data-type="empty" data-state="default">
+       <button class="fetch-dropdown__field" type="button">
+         <span class="fetch-dropdown__text">
+           <span class="fetch-dropdown__label">Label</span>
+           <span class="fetch-dropdown__value">Value</span>
+         </span>
+         <span class="fetch-dropdown__chevron" aria-hidden="true"></span>
+       </button>
+       <div class="fetch-dropdown__helper">…</div>
+     </div>
+   ========================================================================== */
+
+.fetch-dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--fetch-font-sans);
+  min-width: 240px;
+}
+
+.fetch-dropdown__field {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 48px;
+  padding: 6px 16px;
+  margin: 0;
+  background: var(--fetch-surface-bg-primary);
+  border: 1px solid var(--fetch-border-divider-primary); /* #302D3E @ 20% */
+  border-radius: 8px;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 120ms ease-out, background-color 120ms ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+.fetch-dropdown__field:focus-visible {
+  outline: 2px solid var(--fetch-purple-110);
+  outline-offset: 2px;
+}
+
+/* Text column (label + value) */
+.fetch-dropdown__text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.fetch-dropdown__label {
+  display: block;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: var(--fetch-fw-regular);
+  color: var(--fetch-text-secondary); /* #302D3E @ 70% */
+  transition: font-size 120ms ease-out, line-height 120ms ease-out;
+  pointer-events: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.fetch-dropdown__value {
+  display: none;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: var(--fetch-fw-semibold);
+  color: var(--fetch-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* Active + Filled: label shrinks to mini, value shows below */
+.fetch-dropdown[data-type="active"] .fetch-dropdown__label,
+.fetch-dropdown[data-type="filled"] .fetch-dropdown__label {
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+}
+.fetch-dropdown[data-type="active"] .fetch-dropdown__value,
+.fetch-dropdown[data-type="filled"] .fetch-dropdown__value {
+  display: block;
+}
+
+/* Active: purple border (open state) */
+.fetch-dropdown[data-type="active"] .fetch-dropdown__field {
+  border-color: var(--fetch-purple-110);
+}
+
+/* Chevron — masked SVG so it inherits color */
+.fetch-dropdown__chevron {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  background: var(--fetch-grey-100);
+  -webkit-mask: url("../assets/icons/chevron-down.svg") center / 24px 24px no-repeat;
+          mask: url("../assets/icons/chevron-down.svg") center / 24px 24px no-repeat;
+}
+.fetch-dropdown[data-type="active"] .fetch-dropdown__chevron {
+  -webkit-mask: url("../assets/icons/chevron-up.svg") center / 24px 24px no-repeat;
+          mask: url("../assets/icons/chevron-up.svg") center / 24px 24px no-repeat;
+}
+
+/* Disabled */
+.fetch-dropdown[data-state="disabled"] .fetch-dropdown__field {
+  background: var(--fetch-surface-bg-tertiary); /* #EDEBEE */
+  border-color: var(--fetch-border-divider-primary);
+  cursor: not-allowed;
+}
+.fetch-dropdown[data-state="disabled"] .fetch-dropdown__value {
+  color: var(--fetch-text-secondary); /* #302D3E @ 70% */
+}
+.fetch-dropdown[data-state="disabled"] .fetch-dropdown__chevron {
+  background: var(--fetch-tblack-a50);
+}
+
+/* Warning — orange border, warning color wins over active */
+.fetch-dropdown[data-state="warning"] .fetch-dropdown__field {
+  border-color: var(--fetch-orange-40); /* #FFA900 */
+}
+
+/* Error — red border */
+.fetch-dropdown[data-state="error"] .fetch-dropdown__field {
+  border-color: var(--fetch-red-70); /* #D72427 */
+}
+
+/* Helper row */
+.fetch-dropdown__helper {
+  display: none;
+  align-items: flex-start;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: var(--fetch-fw-regular);
+  color: var(--fetch-text-primary);
+}
+.fetch-dropdown__helper svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.fetch-dropdown[data-state="warning"] .fetch-dropdown__helper,
+.fetch-dropdown[data-state="error"] .fetch-dropdown__helper {
+  display: flex;
+}
+.fetch-dropdown[data-state="error"] .fetch-dropdown__helper {
+  color: var(--fetch-red-70);
+}
+.fetch-dropdown[data-state="error"] .fetch-dropdown__helper svg {
+  color: var(--fetch-red-70);
+}
+.fetch-dropdown[data-state="warning"] .fetch-dropdown__helper svg {
+  color: var(--fetch-grey-100);
+}
+.fetch-dropdown[data-state="disabled"] .fetch-dropdown__helper {
+  display: none;
+}

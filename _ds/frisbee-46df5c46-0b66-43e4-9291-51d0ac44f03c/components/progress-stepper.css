@@ -1,0 +1,83 @@
+/* ============================================================
+   fetch-progress-stepper
+   ----------------------
+   Discrete, segmented progress for COUNT-based goals (Buy 2, Buy 3,
+   collect 4 of N). Renders one rounded pill per step.
+
+   Use this for any "X of Y" interaction where progress advances
+   one whole unit at a time. For continuous / fractional progress
+   (a spend bar, a download), use a single filled track instead.
+
+   Markup:
+     <div class="fetch-progress-stepper" role="progressbar"
+          aria-valuemin="0" aria-valuemax="4" aria-valuenow="2">
+       <div class="fetch-progress-stepper__step fetch-progress-stepper__step--filled"></div>
+       <div class="fetch-progress-stepper__step fetch-progress-stepper__step--filled"></div>
+       <div class="fetch-progress-stepper__step"></div>
+       <div class="fetch-progress-stepper__step"></div>
+     </div>
+
+   Modifiers:
+     fetch-progress-stepper--small   → h:4px,  per-step radius 4px
+     fetch-progress-stepper--medium  → h:8px,  per-step radius 4px (default)
+     fetch-progress-stepper--large   → h:12px, per-step radius 12px (pill)
+
+   The width of the stepper is controlled by its parent — the steps
+   share the available space equally regardless of step count.
+   ============================================================ */
+
+.fetch-progress-stepper {
+  /* defaults = medium */
+  --_stepper-height: 8px; /* @kind other */
+  --_stepper-step-radius: 4px; /* @kind other */
+  --_stepper-fill: var(--fetch-blue-90, #3032AE); /* @kind other */
+  --_stepper-track: rgba(48, 45, 62, 0.10); /* @kind other */
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  height: var(--_stepper-height);
+  width: 100%;
+}
+
+.fetch-progress-stepper__step {
+  flex: 1 1 0;
+  align-self: stretch;
+  min-width: 0;
+  background: var(--_stepper-track);
+  border-radius: var(--_stepper-step-radius);
+}
+
+.fetch-progress-stepper__step--filled {
+  background: var(--_stepper-fill);
+}
+
+/* --- Sizes ------------------------------------------------------------ */
+
+.fetch-progress-stepper--small {
+  --_stepper-height: 4px; /* @kind other */
+  --_stepper-step-radius: 4px; /* @kind other */
+}
+
+.fetch-progress-stepper--medium {
+  --_stepper-height: 8px; /* @kind other */
+  --_stepper-step-radius: 4px; /* @kind other */
+}
+
+.fetch-progress-stepper--large {
+  --_stepper-height: 12px; /* @kind other */
+  --_stepper-step-radius: 12px; /* @kind other */
+}
+
+/* --- Color override slot ----------------------------------------------
+   Consumers can re-tint the fill via --fetch-progress-stepper-fill on
+   the root, e.g. an offer card that wants the stepper to inherit its
+   accent color:
+     .fetch-offer[data-type="buy"] .fetch-progress-stepper {
+       --fetch-progress-stepper-fill: var(--fetch-purple-80);
+     }
+*/
+.fetch-progress-stepper {
+  --_stepper-fill: var(--fetch-progress-stepper-fill, var(--fetch-blue-90, #3032AE)); /* @kind other */
+}

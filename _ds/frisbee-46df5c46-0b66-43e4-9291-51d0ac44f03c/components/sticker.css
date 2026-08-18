@@ -1,0 +1,231 @@
+/* ==========================================================================
+   Fetch Design System — Sticker
+   --------------------------------------------------------------------------
+   Variants:
+     - Tone:  Default | Strong | Gradient
+     - Color: Red, Orange, Yellow, Green, Teal, Blue, Blurple, Purple, Pink,
+              Grey, White
+     - Type:  Text Only | Text and Icon | Icon Only
+     - Size:  Small | Medium | Large   (all three defined here)
+   --------------------------------------------------------------------------
+   Color tokens map to fetch's design system color ramps:
+     Default tone — bg = light tint, fg = dark anchor
+       Red       bg --fetch-red-5      fg --fetch-red-70
+       Orange    bg --fetch-orange-10  fg --fetch-orange-70
+       Yellow    bg --fetch-yellow-10  fg --fetch-yellow-90
+       Green     bg --fetch-green-10   fg --fetch-green-70
+       Teal      bg --fetch-teal-10    fg --fetch-teal-70
+       Blue      bg --fetch-blue-10    fg --fetch-blue-90
+       Blurple   bg --fetch-purple-10 fg --fetch-purple-90
+       Purple    bg --fetch-purple-5   fg --fetch-purple-70
+       Pink      bg --fetch-pink-5     fg --fetch-pink-70
+       Grey      bg --fetch-grey-10    fg --fetch-grey-90
+       White     bg --fetch-grey-0     fg --fetch-grey-100
+     Strong tone — bg = Default's fg color, fg = white (or near-black for white)
+   ========================================================================== */
+
+.fetch-sticker {
+  /* base — color is wired per-color modifier below via two CSS vars */
+  --_sticker-bg: var(--fetch-grey-10); /* @kind other */
+  --_sticker-fg: var(--fetch-grey-90); /* @kind other */
+  --_sticker-shine: transparent; /* @kind other */
+
+  position: relative;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 0;
+  font-family: var(--fetch-font-sans);
+  font-weight: var(--fetch-fw-semibold); /* 600 */
+  font-style: normal;
+  white-space: nowrap;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+  isolation: isolate;
+
+  background: var(--_sticker-bg);
+  color: var(--_sticker-fg);
+}
+
+/* ---------- Tone: Gradient ----------------------------------------------
+   Two-color diagonal gradient (134.92deg) with a top-left "shine" overlay
+   (~half the inner width, full inner height, 2px inset). Foreground stays
+   dark — same anchor color as Default tone. */
+.fetch-sticker--gradient {
+  background: linear-gradient(134.92deg, var(--_sticker-shine) 0%, var(--_sticker-bg) 100%);
+}
+.fetch-sticker--gradient::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: calc(50% - 1px);
+  border-radius: calc(var(--_sticker-radius, 6px) - 2px);
+  background: var(--_sticker-shine);
+  pointer-events: none;
+  z-index: 0;
+}
+.fetch-sticker--gradient.fetch-sticker--small::before {
+  left: 1px;
+  top: 1px;
+  bottom: 1px;
+  width: calc(50% - 0.5px);
+  border-radius: calc(var(--_sticker-radius, 4px) - 1px);
+}
+.fetch-sticker--gradient .fetch-sticker__icon,
+.fetch-sticker--gradient .fetch-sticker__label {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Size: Large -------------------------------------------------- */
+.fetch-sticker--large {
+  height: 32px;
+  padding: 6px 8px;
+  gap: 4px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.fetch-sticker--large.fetch-sticker--icon-only {
+  width: 32px;
+  padding: 9px;
+  gap: 0;
+}
+
+/* ---------- Size: Medium ------------------------------------------------- */
+.fetch-sticker--medium {
+  height: 24px;
+  padding: 4px;
+  gap: 2px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: var(--fetch-fw-regular); /* 400 — Tiny 12 */
+}
+.fetch-sticker--medium.fetch-sticker--icon-only {
+  width: 24px;
+  padding: 6px;
+  gap: 0;
+}
+
+/* ---------- Size: Small -------------------------------------------------- */
+.fetch-sticker--small {
+  height: 16px;
+  padding: 0 4px;
+  gap: 2px;
+  border-radius: 4px;
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: var(--fetch-fw-regular); /* 400 — Mini 10 */
+}
+.fetch-sticker--small.fetch-sticker--icon-only {
+  width: 16px;
+  padding: 2px;
+  gap: 0;
+}
+
+/* ---------- Inner parts -------------------------------------------------- */
+.fetch-sticker__icon {
+  flex: none;
+  display: inline-block;
+  background-color: var(--_sticker-fg);
+  -webkit-mask: var(--_sticker-mask, none) center / contain no-repeat;
+          mask: var(--_sticker-mask, none) center / contain no-repeat;
+}
+.fetch-sticker--large .fetch-sticker__icon {
+  width: 14px;
+  height: 14px;
+}
+.fetch-sticker--medium .fetch-sticker__icon,
+.fetch-sticker--small .fetch-sticker__icon {
+  width: 12px;
+  height: 12px;
+}
+
+.fetch-sticker__label {
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+  color: inherit;
+}
+
+/* ==========================================================================
+   Color × Tone matrix
+   ========================================================================== */
+
+/* ---- Red ---- */
+.fetch-sticker--red    { --_sticker-bg: var(--fetch-red-5);     --_sticker-fg: var(--fetch-red-70);   }
+.fetch-sticker--red.fetch-sticker--strong    { --_sticker-bg: var(--fetch-red-70);   --_sticker-fg: var(--fetch-grey-0); }
+
+/* ---- Orange ---- */
+.fetch-sticker--orange { --_sticker-bg: var(--fetch-orange-10); --_sticker-fg: var(--fetch-orange-70); }
+.fetch-sticker--orange.fetch-sticker--strong { --_sticker-bg: var(--fetch-orange-70); --_sticker-fg: var(--fetch-grey-0); }
+
+/* ---- Yellow ---- */
+.fetch-sticker--yellow { --_sticker-bg: var(--fetch-yellow-10); --_sticker-fg: var(--fetch-yellow-90); }
+.fetch-sticker--yellow.fetch-sticker--strong { --_sticker-bg: var(--fetch-yellow-90); --_sticker-fg: var(--fetch-grey-0); }
+
+/* ---- Green ---- */
+.fetch-sticker--green  { --_sticker-bg: var(--fetch-green-10);  --_sticker-fg: var(--fetch-green-70); }
+.fetch-sticker--green.fetch-sticker--strong  { --_sticker-bg: var(--fetch-green-70); --_sticker-fg: var(--fetch-grey-0); }
+
+/* ---- Teal ---- */
+.fetch-sticker--teal   { --_sticker-bg: var(--fetch-teal-10);   --_sticker-fg: var(--fetch-teal-70);  }
+.fetch-sticker--teal.fetch-sticker--strong   { --_sticker-bg: var(--fetch-teal-70);  --_sticker-fg: var(--fetch-grey-0); }
+
+/* ---- Blue ---- */
+.fetch-sticker--blue   { --_sticker-bg: var(--fetch-blue-10);   --_sticker-fg: var(--fetch-blue-90);  }
+.fetch-sticker--blue.fetch-sticker--strong   { --_sticker-bg: var(--fetch-blue-90);  --_sticker-fg: var(--fetch-grey-0); }
+
+/* ---- Blurple ---- */
+.fetch-sticker--blurple { --_sticker-bg: var(--fetch-purple-10); --_sticker-fg: var(--fetch-purple-90); }
+.fetch-sticker--blurple.fetch-sticker--strong { --_sticker-bg: var(--fetch-purple-90); --_sticker-fg: var(--fetch-grey-0); }
+
+/* ---- Purple ---- */
+.fetch-sticker--purple { --_sticker-bg: var(--fetch-purple-5);  --_sticker-fg: var(--fetch-purple-70); }
+.fetch-sticker--purple.fetch-sticker--strong { --_sticker-bg: var(--fetch-purple-70); --_sticker-fg: var(--fetch-grey-0); }
+
+/* ---- Pink ---- */
+.fetch-sticker--pink   { --_sticker-bg: var(--fetch-pink-5);    --_sticker-fg: var(--fetch-pink-70); }
+.fetch-sticker--pink.fetch-sticker--strong   { --_sticker-bg: var(--fetch-pink-70);   --_sticker-fg: var(--fetch-grey-0); }
+
+/* ---- Grey ---- */
+.fetch-sticker--grey   { --_sticker-bg: var(--fetch-grey-10);   --_sticker-fg: var(--fetch-grey-90); }
+.fetch-sticker--grey.fetch-sticker--strong   { --_sticker-bg: var(--fetch-grey-90);   --_sticker-fg: var(--fetch-grey-0); }
+
+/* ---- White ---- */
+.fetch-sticker--white  { --_sticker-bg: var(--fetch-grey-0);    --_sticker-fg: var(--fetch-grey-100); }
+.fetch-sticker--white.fetch-sticker--strong  { --_sticker-bg: var(--fetch-grey-100);  --_sticker-fg: var(--fetch-grey-0); }
+
+/* ==========================================================================
+   Gradient tone color pairs — bg = end-stop (-50), shine = start-stop (-30),
+   fg = anchor (-110). All wired to the full palette scales.
+   ========================================================================== */
+.fetch-sticker--red.fetch-sticker--gradient     { --_sticker-bg: var(--fetch-red-50);     --_sticker-shine: var(--fetch-red-30);     --_sticker-fg: var(--fetch-red-110); }
+.fetch-sticker--orange.fetch-sticker--gradient  { --_sticker-bg: var(--fetch-orange-50);  --_sticker-shine: var(--fetch-orange-30);  --_sticker-fg: var(--fetch-orange-110); }
+.fetch-sticker--yellow.fetch-sticker--gradient  { --_sticker-bg: var(--fetch-yellow-50);  --_sticker-shine: var(--fetch-yellow-30);  --_sticker-fg: var(--fetch-yellow-110); }
+.fetch-sticker--green.fetch-sticker--gradient   { --_sticker-bg: var(--fetch-green-50);   --_sticker-shine: var(--fetch-green-30);   --_sticker-fg: var(--fetch-green-110); }
+.fetch-sticker--teal.fetch-sticker--gradient    { --_sticker-bg: var(--fetch-teal-50);    --_sticker-shine: var(--fetch-teal-30);    --_sticker-fg: var(--fetch-teal-110); }
+.fetch-sticker--blue.fetch-sticker--gradient    { --_sticker-bg: var(--fetch-blue-50);    --_sticker-shine: var(--fetch-blue-30);    --_sticker-fg: var(--fetch-blue-110); }
+.fetch-sticker--blurple.fetch-sticker--gradient { --_sticker-bg: var(--fetch-purple-50); --_sticker-shine: var(--fetch-purple-30); --_sticker-fg: var(--fetch-purple-110); }
+.fetch-sticker--purple.fetch-sticker--gradient  { --_sticker-bg: var(--fetch-purple-50);  --_sticker-shine: var(--fetch-purple-30);  --_sticker-fg: var(--fetch-purple-110); }
+.fetch-sticker--pink.fetch-sticker--gradient    { --_sticker-bg: var(--fetch-pink-50);    --_sticker-shine: var(--fetch-pink-30);    --_sticker-fg: var(--fetch-pink-110); }
+.fetch-sticker--grey.fetch-sticker--gradient    { --_sticker-bg: var(--fetch-grey-50);    --_sticker-shine: var(--fetch-grey-30);    --_sticker-fg: var(--fetch-grey-110); }
+.fetch-sticker--white.fetch-sticker--gradient   { --_sticker-bg: var(--fetch-grey-20);    --_sticker-shine: var(--fetch-grey-0);     --_sticker-fg: var(--fetch-grey-110); }
+
+/* ==========================================================================
+   Icon presets — inline data URIs so they work in any sandbox.
+   Apply with .fetch-sticker--icon-{name} on the sticker itself; that
+   targets a child .fetch-sticker__icon and sets its mask.
+   Available: time · ereceipt · error · trophy · heart · location
+   ========================================================================== */
+
+.fetch-sticker--icon-time .fetch-sticker__icon { --_sticker-mask: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23000%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M17.2945%202.29289C17.685%201.90237%2018.3182%201.90237%2018.7087%202.29289L21.478%205.06212C21.8685%205.45265%2021.8685%206.08581%2021.478%206.47634C21.0874%206.86686%2020.4543%206.86686%2020.0637%206.47634L17.2945%203.70711C16.904%203.31658%2016.904%202.68342%2017.2945%202.29289Z%22%2F%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M6.70827%202.29292C6.31775%201.9024%205.68458%201.9024%205.29406%202.29292L2.52483%205.06215C2.1343%205.45268%202.1343%206.08584%202.52483%206.47637C2.91535%206.86689%203.54852%206.86689%203.93904%206.47637L6.70827%203.70714C7.0988%203.31661%207.0988%202.68345%206.70827%202.29292Z%22%2F%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M2.6938%2012.6922C2.6938%207.5517%206.86099%203.3845%2012.0015%203.3845C17.142%203.3845%2021.3092%207.5517%2021.3092%2012.6922C21.3092%2017.8327%2017.142%2021.9999%2012.0015%2021.9999C6.86099%2021.9999%202.6938%2017.8327%202.6938%2012.6922ZM13.0019%208.76927C13.0019%208.21699%2012.5542%207.76927%2012.0019%207.76927C11.4496%207.76927%2011.0019%208.21699%2011.0019%208.76927V13.3397L9.44861%2014.893C9.05808%2015.2835%209.05808%2015.9167%209.44861%2016.3072C9.83913%2016.6977%2010.4723%2016.6977%2010.8628%2016.3072L13.0019%2014.1681V8.76927Z%22%2F%3E%3C%2Fsvg%3E"); }
+.fetch-sticker--icon-ereceipt .fetch-sticker__icon { --_sticker-mask: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23000%22%3E%3Cpath%20d%3D%22M12.4315%208.73079C13.2264%208.73079%2013.7338%209.03814%2013.7338%209.58813C13.7338%2010.2675%2012.9896%2010.5749%2011.2306%2010.5749C10.9874%2010.5749%2010.7304%2010.5618%2010.4475%2010.5474L10.3511%2010.5425C10.5033%209.45872%2011.2475%208.73079%2012.4315%208.73079Z%22%2F%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M4%203.5C4%202.94772%204.44772%202.5%205%202.5H19C19.5523%202.5%2020%202.94772%2020%203.5V20.3663C20%2020.7068%2019.8268%2021.0239%2019.5402%2021.2078C19.2537%2021.3918%2018.8933%2021.4173%2018.5837%2021.2755L15.5172%2019.8715L12.4444%2021.3958C12.1644%2021.5347%2011.8356%2021.5347%2011.5556%2021.3958L8.48276%2019.8715L5.4163%2021.2755C5.10672%2021.4173%204.74629%2021.3918%204.45977%2021.2078C4.17324%2021.0239%204%2020.7068%204%2020.3663V3.5ZM12.8372%2013.2602C11.7717%2013.2602%2010.8584%2012.9205%2010.4863%2011.9984C10.8076%2012.0146%2011.1121%2012.0146%2011.3996%2012.0146C14.3256%2012.0146%2016%2011.3514%2016%209.49112C16%207.95439%2014.6469%207%2012.482%207C10.2495%207%208%208.26174%208%2011.0602C8%2013.6484%209.9112%2015.1204%2012.5497%2015.1204C13.4355%2015.1204%2014.2786%2015.0186%2015.1384%2014.7179C15.5406%2014.5772%2015.7374%2014.1567%2015.6307%2013.76C15.4947%2013.2548%2014.9284%2012.9934%2014.3976%2013.1133C13.9448%2013.2156%2013.4726%2013.2602%2012.8372%2013.2602Z%22%2F%3E%3C%2Fsvg%3E"); }
+.fetch-sticker--icon-error .fetch-sticker__icon { --_sticker-mask: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23000%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M12%202C6.477%202%202%206.477%202%2012C2%2017.523%206.477%2022%2012%2022C17.523%2022%2022%2017.523%2022%2012C22%206.477%2017.523%202%2012%202ZM11%207C11%206.448%2011.448%206%2012%206C12.552%206%2013%206.448%2013%207V13C13%2013.552%2012.552%2014%2012%2014C11.448%2014%2011%2013.552%2011%2013V7ZM12%2018.5C11.172%2018.5%2010.5%2017.828%2010.5%2017C10.5%2016.172%2011.172%2015.5%2012%2015.5C12.828%2015.5%2013.5%2016.172%2013.5%2017C13.5%2017.828%2012.828%2018.5%2012%2018.5Z%22%2F%3E%3C%2Fsvg%3E"); }
+.fetch-sticker--icon-trophy .fetch-sticker__icon { --_sticker-mask: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23000%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M6.00853%2012.9131H6.95833C7.96149%2014.1122%209.38452%2014.9481%2011.0014%2015.1946V15.6815C8.56121%2016.1487%206.7157%2018.2956%206.7157%2020.8714C6.7157%2021.4229%207.16277%2021.87%207.71427%2021.87H16.2857C16.8372%2021.87%2017.2843%2021.4229%2017.2843%2020.8714C17.2843%2018.2956%2015.4387%2016.1487%2012.9985%2015.6815V15.1946C14.6155%2014.9481%2016.0386%2014.1121%2017.0418%2012.9129H17.9914C20.4013%2012.9129%2022.3671%2010.9589%2022.3671%208.53715V6.97715C22.3671%205.59422%2021.2515%204.47858%2019.8686%204.47858H18.5697C18.5489%203.18187%2017.4843%202.13%2016.1828%202.13H7.8171C6.51557%202.13%205.4509%203.18198%205.43027%204.47878H4.13138C2.74846%204.47878%201.63281%205.59442%201.63281%206.97735V8.53735C1.63281%2010.9591%203.59868%2012.9131%206.00853%2012.9131ZM5.42998%208.71405C5.43159%209.48352%205.56546%2010.2219%205.81007%2010.9077C4.59217%2010.8068%203.62996%209.78569%203.62996%208.53735V6.97735C3.62996%206.69741%203.85145%206.47592%204.13138%206.47592H5.42996V8.70858L5.42998%208.71405ZM18.57%206.47572V8.70001C18.57%209.47446%2018.436%2010.2176%2018.1899%2010.9075C19.4078%2010.8066%2020.37%209.78548%2020.37%208.53715V6.97715C20.37%206.69722%2020.1485%206.47572%2019.8686%206.47572H18.57Z%22%2F%3E%3C%2Fsvg%3E"); }
+.fetch-sticker--icon-location .fetch-sticker__icon { --_sticker-mask: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23000%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M7.39976%203.36723C8.76178%202.47504%2010.361%202%2011.9954%202C13.6298%202%2015.2291%202.47504%2016.5911%203.36723C17.9533%204.25955%2019.0181%205.52992%2019.6477%207.02C20.2774%208.5103%2020.4425%2010.1514%2020.1212%2011.7348C19.6994%2013.8138%2018.407%2015.7323%2016.9926%2017.3797C15.8388%2018.7234%2014.5296%2019.9679%2013.4203%2021.0222C13.1646%2021.2653%2012.9195%2021.4983%2012.6893%2021.7201C12.302%2022.0933%2011.6888%2022.0933%2011.3015%2021.7201C11.0715%2021.4984%2010.8262%2021.2652%2010.5705%2021.0222C9.4613%2019.9679%208.152%2018.7234%206.99831%2017.3797C5.58385%2015.7323%204.29149%2013.8138%203.86968%2011.7348C3.5484%2010.1514%203.71349%208.5103%204.34317%207.02C4.97276%205.52993%206.03753%204.25955%207.39976%203.36723ZM14.9976%2010.3046C14.9976%2011.9628%2013.6534%2013.307%2011.9952%2013.307C10.3371%2013.307%208.99292%2011.9628%208.99292%2010.3046C8.99292%208.64645%2010.3371%207.30225%2011.9952%207.30225C13.6534%207.30225%2014.9976%208.64645%2014.9976%2010.3046Z%22%2F%3E%3C%2Fsvg%3E"); }
+.fetch-sticker--icon-heart .fetch-sticker__icon { --_sticker-mask: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23000%22%3E%3Cpath%20d%3D%22M22%209.16863C21.9992%2011.1858%2021.3562%2013.1485%2020.1672%2014.7627C19.503%2015.667%2018.7297%2016.4828%2017.8657%2017.1911C16.3701%2018.4033%2014.708%2019.3858%2012.9323%2020.1074C12.3412%2020.3515%2011.68%2020.3515%2011.0889%2020.1074L10.3111%2019.7388L9.85291%2019.4569L9.30948%2019.1642L8.59558%2018.7522C7.36622%2018.0243%206.22841%2017.1469%205.20719%2016.1395C4.9195%2015.8468%204.63181%2015.5324%204.36542%2015.218C2.88644%2013.5573%202.04646%2011.4092%201.99995%209.16863C1.99465%209.11094%201.99465%209.05287%201.99995%208.99517C1.99114%207.43228%202.58581%205.92835%203.65595%204.80709C4.72609%203.68584%206.18615%203.03692%207.72184%203C8.5612%203.05307%209.37861%203.29444%2010.1155%203.70679C10.8524%204.11914%2011.4904%204.69226%2011.984%205.38506C12.4764%204.69116%2013.1143%204.11724%2013.8514%203.70477C14.5885%203.29229%2015.4064%203.05157%2016.2461%203C17.0231%203.01681%2017.7892%203.19015%2018.5%203.51001C19.2109%203.82986%2019.8523%204.28988%2020.3874%204.86348C20.9224%205.43708%2021.3404%206.11289%2021.6172%206.85184C21.894%207.59078%2022.0241%208.37822%2022%209.16863Z%22%2F%3E%3C%2Fsvg%3E"); }

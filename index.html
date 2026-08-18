@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/frisbee-46df5c46-0b66-43e4-9291-51d0ac44f03c/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/frisbee-46df5c46-0b66-43e4-9291-51d0ac44f03c/styles.css">
+  <script src="_ds/frisbee-46df5c46-0b66-43e4-9291-51d0ac44f03c/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: var(--fetch-grey-0); font-family: 'WeGo Sans', 'Figtree', sans-serif; color: var(--fetch-text-primary); -webkit-font-smoothing: antialiased; }
+    a { color: var(--fetch-text-link); text-decoration: none; }
+    a:hover { color: var(--fetch-purple-90); text-decoration: underline; }
+  </style>
+</helmet>
+<div data-screen-label="Memo" style="min-height:100vh; background:var(--fetch-grey-0)">
+
+  <!-- Hero -->
+  <header style="background:var(--fetch-purple-70); color:var(--fetch-grey-0); padding:64px 24px 56px">
+    <div style="max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:20px">
+      <div style="font-size:12px; line-height:16px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-twhite-a70)">Fetch Labs · Innovation &nbsp;·&nbsp; Discovery memo — no build committed</div>
+      <div style="font-size:14px; line-height:20px; font-weight:700; color:var(--fetch-twhite-a70)">Fetch in Conversational AI: Options</div>
+      <h1 style="margin:0; font-size:40px; line-height:48px; font-weight:800; text-wrap:pretty">Getting Fetch into the chat, without asking anyone to remember we exist.</h1>
+      <p style="margin:0; font-size:16px; line-height:24px; color:var(--fetch-twhite-a70); max-width:600px">Chatbots are becoming the new browser. This memo is the options-and-risks read the Innovation lead asked for, to hand to leadership before we decide whether this is worth a real proposal.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:8px 24px; font-size:12px; line-height:16px; color:var(--fetch-twhite-a60); border-top:1px solid var(--fetch-twhite-a20); padding-top:16px">
+        <span><strong style="color:var(--fetch-grey-0); font-weight:600">Author</strong> Joshua Gunning</span>
+        <span><strong style="color:var(--fetch-grey-0); font-weight:600">Contributors</strong> the Innovation lead, a Labs teammate</span>
+        <span><strong style="color:var(--fetch-grey-0); font-weight:600">Team</strong> Fetch Labs (Innovation)</span>
+        <span><strong style="color:var(--fetch-grey-0); font-weight:600">Status</strong> Options memo, no build committed</span>
+        <span><strong style="color:var(--fetch-grey-0); font-weight:600">Last updated</strong> August 18, 2026</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- If you read one thing -->
+  <section data-screen-label="If you read one thing" style="max-width:720px; margin:0 auto; padding:56px 24px 0">
+    <div style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-purple-70); margin-bottom:12px">If you read one thing</div>
+    <p style="margin:0 0 16px; font-size:20px; line-height:28px; font-weight:500; text-wrap:pretty">People are starting to do their planning, research, and shopping inside ChatGPT and Gemini instead of a browser tab. The ask: can Fetch ride along — surfacing a relevant point or offer mid-conversation — without the user ever having to remember Fetch exists?</p>
+    <p style="margin:0; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)">That last clause is the whole constraint. It has to survive on a <strong style="color:var(--fetch-text-primary)">one-time setup</strong>, not something a user does per session, because "remember to invoke Fetch" is the exact problem we're trying to solve in the first place. Three ways to get there exist today; none of them are ready in the way we'd want, and the data on how often this would even matter is thinner than the idea deserves. This memo lays out the options, what's actually blocking each one, and the honest size of the opportunity — so leadership can decide whether this earns a real proposal or stays a "stay-ready" bet.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; margin-top:32px">
+      <div style="background:var(--fetch-grey-5); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:8px">
+        <div style="font-size:32px; line-height:40px; font-weight:800; color:var(--fetch-purple-70)">~9%</div>
+        <div style="font-size:12px; line-height:16px; color:var(--fetch-text-secondary)">of ~2M tracked shopping-relevant prompts triggered ChatGPT Shopping over 9 months (Sep 2025 – Jan 2026) — see <a href="#relevance">04</a> for how it splits</div>
+      </div>
+      <div style="background:var(--fetch-grey-5); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:8px">
+        <div style="font-size:32px; line-height:40px; font-weight:800; color:var(--fetch-purple-70)">1</div>
+        <div style="font-size:12px; line-height:16px; color:var(--fetch-text-secondary)">the number of times a user should ever have to set this up — the constraint every option below is judged against</div>
+      </div>
+      <div style="background:var(--fetch-grey-5); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:8px">
+        <div style="font-size:32px; line-height:40px; font-weight:800; color:var(--fetch-purple-70)">Oct 2026</div>
+        <div style="font-size:12px; line-height:16px; color:var(--fetch-text-secondary)">earliest date floated for a ChatGPT apps marketplace — heard secondhand, unconfirmed</div>
+      </div>
+      <div style="background:var(--fetch-grey-5); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:8px">
+        <div style="font-size:32px; line-height:40px; font-weight:800; color:var(--fetch-red-70)">0</div>
+        <div style="font-size:12px; line-height:16px; color:var(--fetch-text-secondary)">discovery layers live today, on ChatGPT, Claude, or Gemini, that would surface Fetch to a user who isn't already looking for it</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 -->
+  <section data-screen-label="01 Why now" style="max-width:720px; margin:0 auto; padding:64px 24px 0">
+    <div style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-text-tertiary); margin-bottom:8px">01</div>
+    <h2 style="margin:0 0 16px; font-size:28px; line-height:36px; font-weight:800">Why this, why now</h2>
+    <p style="margin:0 0 16px; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)">Leadership, another product lead, and the Innovation lead have all independently landed on the same read: as chat assistants replace the browser tab for research and planning, Fetch's absence from that surface is a growing gap, not a static one.</p>
+    <div style="background:var(--fetch-purple-5); border-radius:12px; padding:20px 24px; margin-bottom:16px; font-size:16px; line-height:24px">The concrete case that keeps coming up: a user asks ChatGPT to plan a trip to Florida. It builds the itinerary — and somewhere in there, could it also say <em style="font-style:normal; font-weight:600; color:var(--fetch-purple-80)">"if you book this through Fetch right now, you'll earn N points"</em>? Same shape applies to CPG and restaurant decisions, the areas where Fetch actually has data on the user.</div>
+    <p style="margin:0; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)">To be clear about what this is <strong style="color:var(--fetch-text-primary)">not</strong>: it is not an attempt to make the purchase happen inside Fetch, or to turn ChatGPT into a new checkout surface for Fetch. Both would be a multi-year behavioral-change problem — the kind that's historically been brutally hard to move, even from inside our own app. The ask here is narrower and more opportunistic: nudge the sliver of value Fetch already has, at the moment it's relevant, in a surface we don't own.</p>
+  </section>
+
+  <!-- 02 -->
+  <section data-screen-label="02 The constraint" style="max-width:720px; margin:0 auto; padding:64px 24px 0">
+    <div style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-text-tertiary); margin-bottom:8px">02</div>
+    <h2 style="margin:0 0 16px; font-size:28px; line-height:36px; font-weight:800">The constraint that rules out most ideas</h2>
+    <p style="margin:0 0 16px; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)">Two questions were on the table, deliberately in this order:</p>
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:20px">
+      <div style="display:flex; gap:16px; background:var(--fetch-grey-5); border-radius:12px; padding:20px">
+        <div style="flex:none; width:28px; height:28px; border-radius:999px; background:var(--fetch-purple-70); color:var(--fetch-grey-0); font-size:14px; font-weight:700; display:flex; align-items:center; justify-content:center">1</div>
+        <p style="margin:0; font-size:16px; line-height:24px"><strong>Can we make Fetch context "stick" in a session without the user re-adding it every time?</strong> <span style="color:var(--fetch-text-secondary)">Right now, in ChatGPT, even a linked doc has to be re-attached per chat. A rewards nudge that requires that kind of manual re-invocation every session isn't solving the top-of-mind problem — it's just relocating it.</span></p>
+      </div>
+      <div style="display:flex; gap:16px; background:var(--fetch-grey-5); border-radius:12px; padding:20px">
+        <div style="flex:none; width:28px; height:28px; border-radius:999px; background:var(--fetch-purple-70); color:var(--fetch-grey-0); font-size:14px; font-weight:700; display:flex; align-items:center; justify-content:center">2</div>
+        <p style="margin:0; font-size:16px; line-height:24px"><strong>Do we have any data suggesting this is relevant today</strong>, <span style="color:var(--fetch-text-secondary)">or is this a bet on a future state? (Section <a href="#relevance">04</a> below.)</span></p>
+      </div>
+    </div>
+    <p style="margin:0; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)">One idea floated and set aside: asking users to add a small snippet to their own custom system instructions ("if this query is about shopping, pull context from this Fetch link"). Technically light — but it asks a user to go edit their own AI's system prompt for our benefit, which is a much bigger ask than it sounds. The read in the room: conversion on that would be close to zero, and we'd be building real infrastructure to support a behavior almost nobody will do.</p>
+  </section>
+
+  <!-- 03 options -->
+  <section data-screen-label="03 Three options" style="max-width:720px; margin:0 auto; padding:64px 24px 0">
+    <div style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-text-tertiary); margin-bottom:8px">03</div>
+    <h2 style="margin:0 0 4px; font-size:28px; line-height:36px; font-weight:800">Three ways to get Fetch into the conversation</h2>
+    <p style="margin:0 0 24px; font-size:14px; line-height:20px; color:var(--fetch-text-tertiary)">Pick a card to expand it.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px">
+      <sc-for list="{{ optionCards }}" as="opt" hint-placeholder-count="3">
+        <button onClick="{{ opt.pick }}" style="{{ opt.cardStyle }}" style-hover="border-color: var(--fetch-purple-70)">
+          <span style="{{ opt.badgeStyle }}">{{ opt.letter }}</span>
+          <span style="font-size:16px; line-height:24px; font-weight:700; color:var(--fetch-text-primary)">{{ opt.name }}</span>
+          <span style="font-size:14px; line-height:20px; font-weight:600; color:var(--fetch-purple-80)">{{ opt.tag }}</span>
+        </button>
+      </sc-for>
+    </div>
+    <div style="border:1px solid var(--fetch-border-card-primary); border-radius:16px; padding:24px 24px 8px; margin-top:12px; box-shadow:0 2px 8px rgba(37,26,107,0.06)">
+      <sc-for list="{{ selRows }}" as="row" hint-placeholder-count="5">
+        <div style="display:flex; gap:16px; padding:0 0 16px; align-items:baseline">
+          <div style="flex:none; width:120px; font-size:12px; line-height:16px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:{{ row.labelColor }}">{{ row.label }}</div>
+          <div style="font-size:14px; line-height:20px; color:var(--fetch-text-secondary)">{{ row.text }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- 04 funnel -->
+  <section id="relevance" data-screen-label="04 Relevance math" style="max-width:720px; margin:0 auto; padding:64px 24px 0">
+    <div style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-text-tertiary); margin-bottom:8px">04</div>
+    <h2 style="margin:0 0 4px; font-size:28px; line-height:36px; font-weight:800">The relevance math</h2>
+    <p style="margin:0 0 24px; font-size:14px; line-height:20px; color:var(--fetch-text-tertiary)">Each step narrows the last. Bar widths are illustrative, not to scale — click a bar for the caveat behind it.</p>
+    <div style="display:flex; flex-direction:column; gap:8px">
+      <sc-for list="{{ funnel }}" as="f" hint-placeholder-count="5">
+        <div style="display:flex; flex-direction:column; gap:0">
+          <button onClick="{{ f.pick }}" style="display:flex; align-items:center; gap:12px; width:100%; padding:0; border:none; background:none; cursor:pointer; font-family:inherit; text-align:left" style-hover="opacity: 0.85">
+            <span style="{{ f.barStyle }}"></span>
+            <span style="flex:none; font-size:14px; line-height:20px; font-weight:800; color:var(--fetch-text-primary); white-space:nowrap">{{ f.slice }}</span>
+            <span style="font-size:14px; line-height:20px; font-weight:500; color:var(--fetch-text-secondary)">{{ f.stepLabel }}</span>
+          </button>
+          <sc-if value="{{ f.active }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:14px; line-height:20px; color:var(--fetch-text-secondary); padding:8px 16px 8px; max-width:560px">{{ f.note }}</div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background:var(--fetch-yellow-10); border-radius:12px; padding:20px 24px; margin-top:24px; font-size:14px; line-height:20px; color:var(--fetch-text-secondary)">One more wrinkle worth sitting with: the people asking ChatGPT to help them buy a TV may not be the same users Fetch has in the app today. That's not necessarily bad — it could be a genuinely different audience worth catering to separately — but it means this isn't simply "reach our existing users somewhere new."</div>
+    <div style="margin-top:40px">
+      <h3 style="margin:0 0 4px; font-size:20px; line-height:28px; font-weight:700">What newer measurements add</h3>
+      <p style="margin:0 0 20px; font-size:14px; line-height:20px; color:var(--fetch-text-tertiary)">Two recent reads on how the surfaces actually behave, one per assistant.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:12px">
+        <div style="border:1px solid var(--fetch-border-card-secondary); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:16px">
+          <div style="display:flex; flex-direction:column; gap:4px">
+            <div style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-purple-70)">ChatGPT Shopping</div>
+            <div style="font-size:16px; line-height:24px; font-weight:700; text-wrap:pretty">Triggers on ~9% of shopping-relevant prompts — but it's all-or-nothing</div>
+            <div style="font-size:12px; line-height:16px; color:var(--fetch-text-tertiary)">~2M unique prompts tracked repeatedly, September 2025 – January 2026</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <div style="font-size:12px; line-height:16px; font-weight:700; color:var(--fetch-text-secondary)">Trigger rate by prompt type</div>
+            <div style="display:flex; align-items:center; gap:8px">
+              <span style="flex:none; width:96px; font-size:12px; line-height:16px; color:var(--fetch-text-secondary)">Open-ended</span>
+              <span style="flex:1; height:16px; border-radius:4px; background:var(--fetch-grey-10); overflow:hidden; display:flex"><span style="width:100%; background:var(--fetch-purple-70)"></span></span>
+              <span style="flex:none; width:44px; font-size:12px; line-height:16px; font-weight:800; text-align:right">12.1%</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px">
+              <span style="flex:none; width:96px; font-size:12px; line-height:16px; color:var(--fetch-text-secondary)">Brand-direct</span>
+              <span style="flex:1; height:16px; border-radius:4px; background:var(--fetch-grey-10); overflow:hidden; display:flex"><span style="width:26%; background:var(--fetch-purple-40)"></span></span>
+              <span style="flex:none; width:44px; font-size:12px; line-height:16px; font-weight:800; text-align:right">3.1%</span>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <div style="font-size:12px; line-height:16px; font-weight:700; color:var(--fetch-text-secondary)">How consistently prompts trigger, over 9 months</div>
+            <div style="display:flex; height:16px; border-radius:4px; overflow:hidden">
+              <span style="width:79.4%; background:var(--fetch-grey-20)"></span>
+              <span style="width:8%; background:var(--fetch-grey-30)"></span>
+              <span style="width:3.4%; background:var(--fetch-purple-20)"></span>
+              <span style="width:2.7%; background:var(--fetch-purple-40)"></span>
+              <span style="width:5.7%; background:var(--fetch-purple-60)"></span>
+              <span style="width:0.7%; min-width:3px; background:var(--fetch-purple-90)"></span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:4px 12px; font-size:10px; line-height:16px; color:var(--fetch-text-tertiary)">
+              <span>Never 79.4%</span><span>Rare 8.0%</span><span>Low 3.4%</span><span>Medium 2.7%</span><span>High 5.7%</span><span>Always 0.7%</span>
+            </div>
+          </div>
+          <div style="font-size:14px; line-height:20px; color:var(--fetch-text-secondary)">Prompts lock into a state: if one triggers today, there's an ~83% chance it triggers again tomorrow; if it doesn't, only ~1.7% it starts. It's a discovery surface, not a search engine — brands win in the consideration set, not the search box.</div>
+          <div style="font-size:12px; line-height:16px; color:var(--fetch-text-tertiary); border-top:1px solid var(--fetch-border-divider-secondary); padding-top:12px">ChatGPT has since removed its shopping-adjacent tools. It supports @-mentioning tools — but that's a per-session action, exactly the setup burden this memo is trying to avoid.</div>
+        </div>
+        <div style="border:1px solid var(--fetch-border-card-secondary); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:16px">
+          <div style="display:flex; flex-direction:column; gap:4px">
+            <div style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-purple-70)">Claude</div>
+            <div style="font-size:16px; line-height:24px; font-weight:700; text-wrap:pretty">No shopping surface at all — it just answers</div>
+            <div style="font-size:12px; line-height:16px; color:var(--fetch-text-tertiary)">Anthropic usage data, US conversations</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <div style="font-size:12px; line-height:16px; font-weight:700; color:var(--fetch-text-secondary)">Most frequent US topics, share of conversations</div>
+            <div style="display:flex; align-items:center; gap:8px">
+              <span style="flex:none; width:130px; font-size:12px; line-height:16px; color:var(--fetch-text-secondary)">Content creation</span>
+              <span style="flex:1; height:16px; border-radius:4px; background:var(--fetch-grey-10); overflow:hidden; display:flex"><span style="width:100%; background:var(--fetch-grey-30)"></span></span>
+              <span style="flex:none; width:44px; font-size:12px; line-height:16px; font-weight:800; text-align:right">20.0%</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px">
+              <span style="flex:none; width:130px; font-size:12px; line-height:16px; color:var(--fetch-text-secondary)">Hobbies &amp; lifestyle</span>
+              <span style="flex:1; height:16px; border-radius:4px; background:var(--fetch-grey-10); overflow:hidden; display:flex"><span style="width:68%; background:var(--fetch-grey-30)"></span></span>
+              <span style="flex:none; width:44px; font-size:12px; line-height:16px; font-weight:800; text-align:right">13.6%</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px">
+              <span style="flex:none; width:130px; font-size:12px; line-height:16px; color:var(--fetch-text-secondary)">Research &amp; intelligence</span>
+              <span style="flex:1; height:16px; border-radius:4px; background:var(--fetch-grey-10); overflow:hidden; display:flex"><span style="width:67%; background:var(--fetch-grey-30)"></span></span>
+              <span style="flex:none; width:44px; font-size:12px; line-height:16px; font-weight:800; text-align:right">13.5%</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px">
+              <span style="flex:none; width:130px; font-size:12px; line-height:16px; font-weight:700; color:var(--fetch-purple-80)">Buying and investing</span>
+              <span style="flex:1; height:16px; border-radius:4px; background:var(--fetch-grey-10); overflow:hidden; display:flex"><span style="width:13%; background:var(--fetch-purple-70)"></span></span>
+              <span style="flex:none; width:44px; font-size:12px; line-height:16px; font-weight:800; text-align:right; color:var(--fetch-purple-80)">2.6%</span>
+            </div>
+          </div>
+          <div style="font-size:14px; line-height:20px; color:var(--fetch-text-secondary)">"Buying and investing" ranks 8th among US topics at 2.6% of conversations — real, but a sliver of how people use Claude today.</div>
+          <div style="font-size:12px; line-height:16px; color:var(--fetch-text-tertiary); border-top:1px solid var(--fetch-border-divider-secondary); padding-top:12px">No product cards, no shopping tools, no discovery layer — any Fetch presence on Claude rides entirely on a connector the user sets up first (option B).</div>
+        </div>
+      </div>
+      <p style="margin:16px 0 0; font-size:14px; line-height:20px; color:var(--fetch-text-secondary)">Read together: shopping intent is real on both assistants, but it's gated by an all-or-nothing trigger system on ChatGPT and absent on Claude. On both, discovery — not user recall — decides who shows up.</p>
+    </div>
+  </section>
+
+  <!-- 05 risks -->
+  <section data-screen-label="05 Other risks" style="max-width:720px; margin:0 auto; padding:64px 24px 0">
+    <div style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-text-tertiary); margin-bottom:8px">05</div>
+    <h2 style="margin:0 0 24px; font-size:28px; line-height:36px; font-weight:800">Other risks</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px">
+      <div style="border:1px solid var(--fetch-border-card-secondary); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:8px">
+        <div style="font-size:16px; line-height:24px; font-weight:700">Discovery is the real blocker, not injection.</div>
+        <div style="font-size:14px; line-height:20px; color:var(--fetch-text-secondary)">Even if Fetch context is technically available, nothing today on ChatGPT, Claude, or Gemini decides <em>on its own</em> to go get it. Every option above either requires the user to set something up first, or waits on a discovery layer nobody has shipped.</div>
+      </div>
+      <div style="border:2px solid var(--fetch-red-70); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:8px">
+        <div style="align-self:flex-start; font-size:10px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-grey-0); background:var(--fetch-red-70); border-radius:4px; padding:0 8px">Sharpest risk</div>
+        <div style="font-size:16px; line-height:24px; font-weight:700">Scope confusion — the sharpest risk in the room.</div>
+        <div style="font-size:14px; line-height:20px; color:var(--fetch-text-secondary)">This track gets conflated easily with two adjacent, separate tracks from the same offsite: the <strong>Proactive Shopping Reward Assistant</strong> (a different, in-app experience) and the <strong>Rewards Layer</strong> (the infrastructure play behind UCP, section <a href="#rewards-layer">06</a>). Keep this memo's ask — conversational-AI integration — distinct from both in any conversation with leadership or the exec stakeholder.</div>
+      </div>
+      <div style="border:1px solid var(--fetch-border-card-secondary); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:8px">
+        <div style="font-size:16px; line-height:24px; font-weight:700">Adjacent legal terrain.</div>
+        <div style="font-size:14px; line-height:20px; color:var(--fetch-text-secondary)">The most promising passive signal — inferring an in-flight purchase from a receipt or confirmation email — runs into the same restrictions Fetch's eReceipts work is already navigating with legal around email review. Nothing here should be pitched as "we'll just read the inbox" without that context attached.</div>
+      </div>
+      <div style="border:1px solid var(--fetch-border-card-secondary); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:8px">
+        <div style="font-size:16px; line-height:24px; font-weight:700">The mobile gap.</div>
+        <div style="font-size:14px; line-height:20px; color:var(--fetch-text-secondary)">Most people don't chat on desktop. Jumping straight to the Gemini or ChatGPT phone app is probably the norm, not the exception — and none of the three options above reach that path today.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section id="rewards-layer" data-screen-label="06 Rewards Layer context" style="max-width:720px; margin:0 auto; padding:64px 24px 0">
+    <div style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-text-tertiary); margin-bottom:8px">06</div>
+    <h2 style="margin:0 0 16px; font-size:28px; line-height:36px; font-weight:800; text-wrap:pretty">Foundational context: the Rewards Layer (not this memo's ask)</h2>
+    <div style="background:var(--fetch-grey-5); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:16px">
+      <p style="margin:0; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)">Separately, the offsite produced a bigger, longer-horizon bet: turning Fetch's issuance, identity, fraud, and redemption infrastructure into a rewards layer other companies could subscribe to — wrapped in the same MCP surface, and related to (but distinct from) the UCP track. That work is why an MCP endpoint (option B above) isn't a from-scratch build if we ever need it — it's a byproduct of a track that's already moving.</p>
+      <p style="margin:0; font-size:14px; line-height:20px; color:var(--fetch-text-tertiary)">One thread worth noting only in passing: a colleague has raised a major CPG partner's interest in using Fetch as rails for their own in-app targeting more than once — early signal that "Fetch as a service" has real pull beyond this specific chat-assistant use case. That belongs in the Rewards Layer conversation, not this one.</p>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section data-screen-label="07 Recommendation" style="max-width:720px; margin:0 auto; padding:64px 24px 72px">
+    <div style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-text-tertiary); margin-bottom:8px">07</div>
+    <h2 style="margin:0 0 16px; font-size:28px; line-height:36px; font-weight:800">The decision &amp; next steps</h2>
+    <p style="margin:0 0 20px; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)">This memo deliberately doesn't make the call — that's leadership's. Three questions, and where they point.</p>
+    <div style="border:2px solid var(--fetch-purple-70); border-radius:16px; padding:24px; margin-bottom:24px; display:flex; flex-direction:column; gap:20px">
+      <sc-for list="{{ decisionQs }}" as="q" hint-placeholder-count="3">
+        <div style="display:flex; flex-direction:column; gap:8px">
+          <div style="font-size:14px; line-height:20px; font-weight:700">{{ q.title }}</div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px">
+            <sc-for list="{{ q.options }}" as="o" hint-placeholder-count="2">
+              <button onClick="{{ o.pick }}" style="{{ o.style }}" style-hover="border-color: var(--fetch-purple-70)">{{ o.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+      <sc-if value="{{ noOutcome }}" hint-placeholder-val="{{ true }}">
+        <div style="font-size:14px; line-height:20px; color:var(--fetch-text-tertiary); border-top:1px solid var(--fetch-border-divider-secondary); padding-top:16px">Answer all three to see where it lands.</div>
+      </sc-if>
+      <sc-if value="{{ hasOutcome }}" hint-placeholder-val="{{ false }}">
+        <div style="background:var(--fetch-purple-5); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:8px">
+          <div style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--fetch-purple-70)">Where that lands</div>
+          <div style="font-size:20px; line-height:28px; font-weight:700">{{ outcomeTitle }}</div>
+          <div style="font-size:14px; line-height:20px; color:var(--fetch-text-secondary)">{{ outcomeBody }}</div>
+        </div>
+      </sc-if>
+      <div style="font-size:12px; line-height:16px; color:var(--fetch-text-tertiary)">For reference: the room's own lean was "stay ready" — but that's an input, not the answer.</div>
+    </div>
+    <p style="margin:0 0 12px; font-size:14px; line-height:20px; font-weight:600; color:var(--fetch-text-secondary)">Whatever the call, three things held in the room:</p>
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px">
+      <div style="display:flex; gap:12px; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)"><span style="flex:none; color:var(--fetch-purple-70); font-weight:800">→</span><span>Don't chase the custom-system-instructions idea — the ask is too heavy for the conversion it would generate.</span></div>
+      <div style="display:flex; gap:12px; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)"><span style="flex:none; color:var(--fetch-purple-70); font-weight:800">→</span><span>If anything ships near-term, scope a small <strong style="color:var(--fetch-text-primary)">Chrome extension</strong> spike — it's the only option that doesn't wait on someone else's timeline.</span></div>
+      <div style="display:flex; gap:12px; font-size:16px; line-height:24px; color:var(--fetch-text-secondary)"><span style="flex:none; color:var(--fetch-purple-70); font-weight:800">→</span><span>Revisit <strong style="color:var(--fetch-text-primary)">MCP / Apps marketplace</strong> once OpenAI confirms an actual date, or ships the discovery layer that would make it worth the setup cost.</span></div>
+    </div>
+    <p style="margin:0 0 32px; font-size:16px; line-height:24px"><strong>The ask:</strong> <span style="color:var(--fetch-text-secondary)">green-light a deeper proposal and a strategy discussion, or hold until the offsite documentation and a conversation with the exec stakeholder have landed.</span></p>
+    <div style="border:1px solid var(--fetch-border-card-secondary); border-radius:12px; overflow:hidden">
+      <div style="display:grid; grid-template-columns:1fr 130px 110px; gap:0; background:var(--fetch-grey-5); padding:12px 20px; font-size:12px; line-height:16px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--fetch-text-tertiary)"><span>Action</span><span>Owner</span><span>Status</span></div>
+      <div style="display:grid; grid-template-columns:1fr 130px 110px; padding:14px 20px; font-size:14px; line-height:20px; border-top:1px solid var(--fetch-border-divider-secondary); align-items:start"><span>Draft and circulate this one-pager</span><span style="color:var(--fetch-text-secondary)">Joshua</span><span style="font-weight:600; color:var(--fetch-green-70)">Done — this doc</span></div>
+      <div style="display:grid; grid-template-columns:1fr 130px 110px; padding:14px 20px; font-size:14px; line-height:20px; border-top:1px solid var(--fetch-border-divider-secondary); align-items:start"><span>Share offsite documentation (Rewards Layer, Fetch Experiences) with the Innovation lead</span><span style="color:var(--fetch-text-secondary)">Labs teammate</span><span style="font-weight:600; color:var(--fetch-orange-60)">Open</span></div>
+      <div style="display:grid; grid-template-columns:1fr 130px 110px; padding:14px 20px; font-size:14px; line-height:20px; border-top:1px solid var(--fetch-border-divider-secondary); align-items:start"><span>Review docs, then start a dedicated Slack group for this workstream</span><span style="color:var(--fetch-text-secondary)">Innovation lead</span><span style="font-weight:600; color:var(--fetch-orange-60)">Open</span></div>
+      <div style="display:grid; grid-template-columns:1fr 130px 110px; padding:14px 20px; font-size:14px; line-height:20px; border-top:1px solid var(--fetch-border-divider-secondary); align-items:start"><span>Schedule a follow-up with the exec stakeholder before Joshua's leave (week of Aug 24, 2026) if possible, otherwise pick up after</span><span style="color:var(--fetch-text-secondary)">Innovation lead / Joshua</span><span style="font-weight:600; color:var(--fetch-orange-60)">Open</span></div>
+    </div>
+    <p style="margin:40px 0 0; font-size:12px; line-height:16px; color:var(--fetch-text-tertiary); border-top:1px solid var(--fetch-border-divider-secondary); padding-top:16px">Source: Reward Assistant sync, August 18, 2026 (Innovation lead, Labs teammate, Joshua Gunning, Fetch Experiences PRD author). Related reading: <em>Fetch Experiences</em> PRD (Fetch Labs) and <em>Rewards Rails: Discovery</em> (Innovation Labs) — both cited here only as foundational context, not as the subject of this memo.</p>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;defaultOption&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], &quot;default&quot;: &quot;A&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Options cards&quot;},
+  &quot;showAllFunnelNotes&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Relevance funnel&quot;}
+}">
+class Component extends DCLogic {
+  state = { open: null, step: null, dq: {} };
+  renderVals() {
+    const open = this.state.open ?? (this.props.defaultOption ?? 'A');
+    const showAllNotes = this.props.showAllFunnelNotes ?? false;
+    const OPTIONS = [
+      { letter: 'A', name: 'Chrome extension', tag: 'the near-term pick', rows: [
+        ['Mechanism', "one-time install; the extension recognizes a relevant moment and injects Fetch context directly into the page, on any desktop AI surface — ChatGPT web, Claude web/desktop, Gemini web, even Google's AI Overview box."],
+        ['Setup burden', 'lowest of the three. One install, zero per-session action, and it needs cooperation from no one — not OpenAI, not Anthropic, not Google.'],
+        ['Reach', 'desktop only.'],
+        ['Status', 'buildable today.'],
+        ['Open question', "the extension has to read what's in the session to know when to inject, which is a real privacy/scope question worth clearing before this goes further — not a reason to stop, a reason to scope it carefully."],
+        ['Side benefit', "a genuine use case that could help drive adoption of Fetch's Chrome extension more broadly, beyond this one feature."],
+        ['Verdict', "not because it's the best long-term shape, but because it's the only option that isn't waiting on someone else's roadmap."],
+      ]},
+      { letter: 'B', name: 'MCP connector', tag: 'the right shape, wrong-today UX', rows: [
+        ['Mechanism', 'Fetch stands up an MCP endpoint; a user manually connects it inside ChatGPT or Claude (both support this today; Gemini unchecked). Once connected, it\'s live for every session.'],
+        ['Setup burden', 'high. Setting up a connector today means filling in roughly five fields, including a URL and credentials, through an auth flow. Fetch controls its own auth UX, but not the connector-adding experience itself — and it shows: this has been tried and failed personally by someone on this thread more than once.'],
+        ['Reach', 'any surface that supports MCP connectors — but only for the sliver of users who complete a genuinely technical setup.'],
+        ['Status', 'technically live today. Practically, a power-user feature.'],
+        ['Verdict', 'worth having regardless — the Rewards Layer track (section 06) produces this endpoint as a byproduct — but not a near-term distribution answer on its own.'],
+      ]},
+      { letter: 'C', name: 'ChatGPT Apps / marketplace', tag: 'the one we want most, control least', rows: [
+        ['Mechanism', 'OpenAI has floated a marketplace-style "apps" layer where a user installs Fetch once and it\'s live in every future session, no re-linking. Beyond that, OpenAI has signaled it wants an "SEO-style" discovery layer that would let ChatGPT decide on its own when to call Fetch\'s tools — genuinely solving the top-of-mind problem for us.'],
+        ['Setup burden', 'would be the lowest of all three, if it ships as described.'],
+        ['Reach', "whatever OpenAI's footprint is, plus whatever Claude and Gemini ship in response."],
+        ['Status', 'unconfirmed. As of two weeks before this memo, a contact leading Apps at OpenAI described the team as de-prioritized behind enterprise work; October 2026 has been mentioned as a possible launch, not a committed one. The discovery layer has no timeline at all, and doesn\'t exist on ChatGPT, Claude, or Gemini today.'],
+        ['Verdict', "track it. Don't plan around a date that isn't real yet."],
+      ]},
+    ];
+    const optionCards = OPTIONS.map(o => {
+      const sel = o.letter === open;
+      return {
+        letter: o.letter, name: o.name, tag: o.tag,
+        pick: () => this.setState({ open: o.letter }),
+        cardStyle: `text-align:left; cursor:pointer; font-family:inherit; display:flex; flex-direction:column; align-items:flex-start; gap:8px; padding:20px; border-radius:12px; background:${sel ? 'var(--fetch-purple-5)' : 'var(--fetch-grey-0)'}; border:2px solid ${sel ? 'var(--fetch-purple-70)' : 'var(--fetch-border-card-secondary)'}; transition:border-color 160ms ease-out`,
+        badgeStyle: `width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:800; background:${sel ? 'var(--fetch-purple-70)' : 'var(--fetch-grey-10)'}; color:${sel ? 'var(--fetch-grey-0)' : 'var(--fetch-text-secondary)'}`,
+      };
+    });
+    const selOpt = OPTIONS.find(o => o.letter === open);
+    const selRows = selOpt.rows.map(([label, text]) => ({
+      label, text,
+      labelColor: label === 'Verdict' ? 'var(--fetch-purple-80)' : 'var(--fetch-text-tertiary)',
+    }));
+    const FUNNEL = [
+      ['All ChatGPT queries', '100%', 'baseline', 100],
+      ['→ trigger a shopping surface', '~9%', "measured, not guessed: across ~2M shopping-relevant prompts tracked Sep 2025 – Jan 2026, ChatGPT Shopping fired on ~9% of submissions — 12.1% for open-ended prompts, 3.1% for brand-direct (details below)", 56],
+      ['→ by Fetch\'s broader definition of "shopping"', 'maybe ~10% (unverified)', 'our version of shopping is likely broader than theirs — but this is a guess, not a measurement', 34],
+      ['→ actually in a category Fetch is strong in', 'thinner still', "Fetch's day-to-day value is concentrated in CPG and restaurants, not general online retail", 19],
+      ['→ the closest realistic match: big-ticket research', 'a stretch', 'ChatGPT shopping queries likely skew toward things like "which TV should I buy" — reachable via Button merchants, proven feasible by Reward Assistant, but it requires the same kind of behavior change that\'s historically been very hard to force', 9],
+    ];
+    const shades = ['var(--fetch-purple-70)', 'var(--fetch-purple-60)', 'var(--fetch-purple-50)', 'var(--fetch-purple-40)', 'var(--fetch-purple-30)'];
+    const darkText = [false, false, false, true, true];
+    const funnel = FUNNEL.map(([stepLabel, slice, note, w], i) => ({
+      stepLabel, slice, note,
+      active: showAllNotes || this.state.step === i,
+      pick: () => this.setState({ step: this.state.step === i ? null : i }),
+      barStyle: `flex:none; width:${w * 0.45}%; height:36px; border-radius:8px; background:${shades[i]}`,
+    }));
+    const dq = this.state.dq || {};
+    const QS = [
+      { id: 'urgency', title: 'How urgent is this window?', opts: ['Move before the platforms settle', 'Fine to wait for real dates'] },
+      { id: 'data', title: 'Is the relevance data good enough to act on?', opts: ['Directional is enough', 'Measure before building'] },
+      { id: 'eng', title: 'Engineering appetite this quarter?', opts: ['A small spike is fine', 'Nothing until a full proposal'] },
+    ];
+    const decisionQs = QS.map(q => ({
+      title: q.title,
+      options: q.opts.map((label, i) => {
+        const sel = dq[q.id] === i;
+        return {
+          label,
+          pick: () => this.setState(s => ({ dq: { ...s.dq, [q.id]: i } })),
+          style: `cursor:pointer; font-family:inherit; font-size:14px; line-height:20px; font-weight:600; padding:8px 16px; border-radius:999px; border:1px solid ${sel ? 'var(--fetch-purple-70)' : 'var(--fetch-tblack-a20)'}; background:${sel ? 'var(--fetch-purple-70)' : 'var(--fetch-grey-0)'}; color:${sel ? 'var(--fetch-grey-0)' : 'var(--fetch-text-secondary)'}; transition:background 160ms ease-out, border-color 160ms ease-out`,
+        };
+      }),
+    }));
+    const answered = QS.every(q => dq[q.id] !== undefined);
+    let outcomeTitle = '', outcomeBody = '';
+    if (answered) {
+      if (dq.data === 1) {
+        outcomeTitle = 'Measure first';
+        outcomeBody = "Before any build, run a Fetch-category version of the trigger study: pull the prompts Fetch users would actually type, test them repeatedly over weeks, and see how often a shopping surface actually fires. Cheap, and it turns the funnel's guesses into numbers.";
+      } else if (dq.urgency === 0 && dq.eng === 0) {
+        outcomeTitle = 'Scope the Chrome extension spike';
+        outcomeBody = "It's the only option that doesn't wait on someone else's roadmap. Clear the privacy/scope question first, keep it small, and let the Rewards Layer track produce the MCP endpoint in parallel.";
+      } else {
+        outcomeTitle = 'Stay ready';
+        outcomeBody = "Hold engineering time. Track OpenAI's Apps marketplace for a real date, let the Rewards Layer produce the MCP endpoint as a byproduct, and revisit when a discovery layer actually ships.";
+      }
+    }
+    return { optionCards, selRows, funnel, decisionQs, hasOutcome: answered, noOutcome: !answered, outcomeTitle, outcomeBody };
+  }
+}
+</script>
+</body>
+</html>

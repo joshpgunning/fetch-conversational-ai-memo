@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Fetch Design System — Avatar
+   --------------------------------------------------------------------------
+   Circular user avatar — real photo OR preset illustrated fallback (each
+   user is assigned a random preset on signup). Class: .fetch-avatar with
+   size modifiers --xs / --sm / --md / --lg / --xl.
+   --------------------------------------------------------------------------
+   Usage:
+     <span class="fetch-avatar fetch-avatar--md">
+       <img src="..." alt="Hannah Gilroy">
+     </span>
+
+     <span class="fetch-avatar fetch-avatar--md" data-preset="balloon"
+           role="img" aria-label="Balloon"></span>
+
+   For overflow chips in stacks, use the `--overflow` modifier (light-grey
+   bg + secondary text, no image, no preset):
+     <span class="fetch-avatar fetch-avatar--md fetch-avatar--overflow">+5</span>
+   ========================================================================== */
+
+.fetch-avatar {
+  --_avatar-size: 32px; /* @kind other */
+  --_avatar-bg: var(--fetch-grey-20, #E5E5E8); /* @kind other */
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--_avatar-size);
+  height: var(--_avatar-size);
+  border-radius: 50%;
+  background: var(--_avatar-bg);
+  overflow: hidden;
+  font-family: var(--fetch-font-sans);
+  font-weight: var(--fetch-fw-semibold, 600);
+  letter-spacing: 0;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.fetch-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
+}
+
+/* Preset fallback avatars — when no image is available, drop in a fun
+   illustrated icon. Set data-preset="balloon" (etc) on the .fetch-avatar.
+   The art is a full-bleed PNG that already includes its own bg color.
+   ----------------------------------------------------------------------- */
+.fetch-avatar[data-preset] {
+  background: transparent;
+}
+.fetch-avatar[data-preset="balloon"]            { background-image: url("../assets/avatars/preset-balloon.png"); }
+.fetch-avatar[data-preset="clover"]             { background-image: url("../assets/avatars/preset-clover.png"); }
+.fetch-avatar[data-preset="cupcake"]            { background-image: url("../assets/avatars/preset-cupcake.png"); }
+.fetch-avatar[data-preset="gem"]                { background-image: url("../assets/avatars/preset-gem.png"); }
+.fetch-avatar[data-preset="grapes"]             { background-image: url("../assets/avatars/preset-grapes.png"); }
+.fetch-avatar[data-preset="ice-cream"]          { background-image: url("../assets/avatars/preset-ice-cream.png"); }
+.fetch-avatar[data-preset="light-bulb"]         { background-image: url("../assets/avatars/preset-light-bulb.png"); }
+.fetch-avatar[data-preset="music-note-beamed"]  { background-image: url("../assets/avatars/preset-music-note-beamed.png"); }
+.fetch-avatar[data-preset="music-note-eighth"]  { background-image: url("../assets/avatars/preset-music-note-eighth.png"); }
+.fetch-avatar[data-preset="palm-tree"]          { background-image: url("../assets/avatars/preset-palm-tree.png"); }
+.fetch-avatar[data-preset="party-hat"]          { background-image: url("../assets/avatars/preset-party-hat.png"); }
+.fetch-avatar[data-preset="sparkles"]           { background-image: url("../assets/avatars/preset-sparkles.png"); }
+.fetch-avatar[data-preset="star"]               { background-image: url("../assets/avatars/preset-star.png"); }
+.fetch-avatar[data-preset="sun"]                { background-image: url("../assets/avatars/preset-sun.png"); }
+.fetch-avatar[data-preset="tree"]               { background-image: url("../assets/avatars/preset-tree.png"); }
+.fetch-avatar[data-preset] {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Sizes ------------------------------------------------------------------ */
+.fetch-avatar--xs { --_avatar-size: 20px; font-size: 9px;  line-height: 12px; }
+.fetch-avatar--sm { --_avatar-size: 24px; font-size: 10px; line-height: 14px; }
+.fetch-avatar--md { --_avatar-size: 32px; font-size: 12px; line-height: 16px; }
+.fetch-avatar--lg { --_avatar-size: 48px; font-size: 18px; line-height: 24px; }
+.fetch-avatar--xl { --_avatar-size: 64px; font-size: 24px; line-height: 32px; }
+
+/* Overflow chip — light grey bg + secondary text. Used as the trailing
+   "+N" tile in stacked groups. No image, no preset; just text content. */
+.fetch-avatar--overflow {
+  background: var(--fetch-grey-20, #E5E5E8);
+  color: var(--fetch-text-secondary, #6F767D);
+}
+
+/* Optional white ring (for stacking / overlapping) ----------------------- */
+.fetch-avatar--ring {
+  box-shadow: 0 0 0 2px var(--fetch-surface-bg-primary, #fff);
+}
+
+/* Stack: overlapping avatars row. Apply to the wrapper. ------------------ */
+.fetch-avatar-stack {
+  display: inline-flex;
+  align-items: center;
+}
+.fetch-avatar-stack > .fetch-avatar + .fetch-avatar {
+  margin-left: -8px;
+}
+.fetch-avatar-stack > .fetch-avatar--xs + .fetch-avatar--xs { margin-left: -6px; }
+.fetch-avatar-stack > .fetch-avatar--sm + .fetch-avatar--sm { margin-left: -7px; }
+.fetch-avatar-stack > .fetch-avatar--lg + .fetch-avatar--lg { margin-left: -12px; }
+.fetch-avatar-stack > .fetch-avatar--xl + .fetch-avatar--xl { margin-left: -16px; }

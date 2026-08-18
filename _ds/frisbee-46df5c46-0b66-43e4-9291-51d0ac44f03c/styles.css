@@ -1,0 +1,31 @@
+/* ==========================================================================
+   Fetch Design System — root stylesheet
+   --------------------------------------------------------------------------
+   Single entry point. Consumers link this one file to pull in the full
+   system: foundation tokens (colors, type, shadows, radii, spacing) plus
+   every component's CSS. Authored component/preview HTML may still link the
+   individual files directly — this aggregate is for downstream consumers.
+   ========================================================================== */
+
+/* Foundations — tokens, @font-face, type ramp (source of truth) */
+@import url('colors_and_type.css');
+
+/* Components */
+@import url('components/avatar.css');
+@import url('components/bottom-sheet.css');
+@import url('components/button.css');
+@import url('components/carousel.css');
+@import url('components/checkbox.css');
+@import url('components/chip.css');
+@import url('components/dropdown.css');
+@import url('components/header.css');
+@import url('components/icon-button.css');
+@import url('components/main-nav.css');
+@import url('components/offer-card.css');
+@import url('components/progress-bar.css');
+@import url('components/progress-stepper.css');
+@import url('components/reactions.css');
+@import url('components/search-bar.css');
+@import url('components/shelf.css');
+@import url('components/sticker.css');
+@import url('components/text-input.css');

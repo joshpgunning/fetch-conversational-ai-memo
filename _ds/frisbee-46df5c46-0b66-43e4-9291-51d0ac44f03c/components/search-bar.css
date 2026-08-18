@@ -1,0 +1,140 @@
+/* ==========================================================================
+   Fetch Design System — Search Bar
+   --------------------------------------------------------------------------
+   Pill-shaped search field with 4 states selected via data-state on root:
+
+     default — leading magnifier icon, placeholder, light border
+     empty   — leading back chevron, placeholder, light border (post-tap, no text)
+     typing  — leading back chevron, real text + cursor, trailing close, dark border
+     filled  — leading back chevron, real text, trailing close, light border
+
+   Field is 44px tall, 80px (pill) radius, 1px border, 10px padding.
+   Border darkens to grey-70 only while typing — filled returns to the light tint.
+
+   Markup:
+     <div class="fetch-search" data-state="default">
+       <span class="fetch-search__leading"></span>
+       <span class="fetch-search__text">…</span>
+       <button class="fetch-search__clear" type="button" aria-label="Clear"></button>
+     </div>
+   ========================================================================== */
+
+.fetch-search {
+  --_search-h: 44px; /* @kind other */
+  --_search-pad-y: 10px; /* @kind other */
+  --_search-pad-x: 10px; /* @kind other */
+  --_search-gap: 10px; /* @kind other */
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--_search-gap);
+  padding: var(--_search-pad-y) var(--_search-pad-x);
+  width: 100%;
+  height: var(--_search-h);
+  background: var(--fetch-surface-bg-primary, #fff);
+  border: 1px solid var(--fetch-border-divider-primary); /* tblack a20 */
+  border-radius: 80px;
+  font-family: var(--fetch-font-sans);
+  cursor: text;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Leading icon slot (search magnifier OR back chevron) ------------------- */
+.fetch-search__leading {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fetch-grey-100, #302D3E);
+}
+/* Search-alt icon (default state only) */
+.fetch-search[data-state="default"] .fetch-search__leading {
+  background: url("../assets/icons/search-alt.svg") center / 24px 24px no-repeat;
+}
+/* Chevron-left icon (empty / typing / filled) — masked so it inherits text color */
+.fetch-search[data-state="empty"] .fetch-search__leading,
+.fetch-search[data-state="typing"] .fetch-search__leading,
+.fetch-search[data-state="filled"] .fetch-search__leading {
+  background: var(--fetch-grey-100, #302D3E);
+  -webkit-mask: url("../assets/icons/chevron-left.svg") center / 24px 24px no-repeat;
+          mask: url("../assets/icons/chevron-left.svg") center / 24px 24px no-repeat;
+}
+/* Make the leading slot a real, clickable button when there's a back action */
+.fetch-search button.fetch-search__leading {
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* Text slot — placeholder OR real value (+ cursor) ----------------------- */
+.fetch-search__text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: var(--fetch-fw-regular, 400);
+  color: var(--fetch-text-primary, #302D3E);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* Placeholder (default + empty): grey, half-opacity */
+.fetch-search[data-state="default"] .fetch-search__text,
+.fetch-search[data-state="empty"]   .fetch-search__text {
+  color: rgba(48, 45, 62, 0.5);
+}
+
+/* Blinking caret — visible while focused (typing) AND when focused-but-empty
+   so the demo shows an active field even before the user types. */
+.fetch-search__cursor {
+  display: none;
+  width: 1px;
+  height: 16px;
+  background: var(--fetch-purple-110, #371164);
+  flex-shrink: 0;
+}
+.fetch-search[data-state="typing"] .fetch-search__cursor,
+.fetch-search[data-state="empty"]  .fetch-search__cursor {
+  display: inline-block;
+  animation: fetch-search-blink 1s step-end infinite;
+}
+@keyframes fetch-search-blink {
+  50% { opacity: 0; }
+}
+
+/* Trailing close button (typing + filled) ------------------------------- */
+.fetch-search__clear {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  border: 0;
+  padding: 0;
+  background: var(--fetch-grey-100, #302D3E);
+  -webkit-mask: url("../assets/icons/close.svg") center / 24px 24px no-repeat;
+          mask: url("../assets/icons/close.svg") center / 24px 24px no-repeat;
+  cursor: pointer;
+  display: none;
+}
+.fetch-search[data-state="typing"] .fetch-search__clear,
+.fetch-search[data-state="filled"] .fetch-search__clear {
+  display: inline-block;
+}
+
+/* Typing — darker border (per Figma: #736E80 = grey-70) ------------------ */
+.fetch-search[data-state="typing"] {
+  border-color: var(--fetch-grey-70, #736E80);
+  /* Figma spec for typing: 10/12/10/10 padding (extra 2px on the right
+     so the close button sits 2px tighter against the edge). */
+  padding-right: 12px;
+}
+.fetch-search[data-state="filled"] {
+  padding-right: 12px;
+}

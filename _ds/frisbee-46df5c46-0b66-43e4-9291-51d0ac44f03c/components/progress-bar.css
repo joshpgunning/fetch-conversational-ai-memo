@@ -1,0 +1,72 @@
+/* ============================================================
+   fetch-progress-bar
+   ------------------
+   Continuous progress for AMOUNT-based goals (Spend $25, a download,
+   any fractional / rate-of-change progress). One filled track inside
+   one rounded container.
+
+   Use this when progress can land at any fractional point along
+   the range. For COUNT-based progress (Buy 2, "X of Y" steps) use
+   fetch-progress-stepper instead.
+
+   Markup:
+     <div class="fetch-progress-bar fetch-progress-bar--medium"
+          role="progressbar" aria-valuemin="0" aria-valuemax="100"
+          aria-valuenow="50">
+       <div class="fetch-progress-bar__fill" style="width: 50%"></div>
+     </div>
+
+   Modifiers:
+     fetch-progress-bar--small   → h:4px,  radius 4px
+     fetch-progress-bar--medium  → h:8px,  radius 4px (default)
+     fetch-progress-bar--large   → h:12px, radius 12px (pill)
+
+   Width is controlled by the parent. Set the FILL via inline width
+   percentage (or any CSS length) on .fetch-progress-bar__fill.
+   ============================================================ */
+
+.fetch-progress-bar {
+  /* defaults = medium */
+  --_progress-height: 8px; /* @kind other */
+  --_progress-radius: 4px; /* @kind other */
+  --_progress-fill: var(--fetch-purple-70, #A408C7); /* @kind other */
+  --_progress-track: rgba(48, 45, 62, 0.10); /* @kind other */
+
+  position: relative;
+  display: block;
+  width: 100%;
+  height: var(--_progress-height);
+  background: var(--_progress-track);
+  border-radius: var(--_progress-radius);
+  overflow: hidden;
+}
+
+.fetch-progress-bar__fill {
+  display: block;
+  height: 100%;
+  min-width: 8px;        /* keep a nub visible at very low progress */
+  max-width: 100%;
+  background: var(--_progress-fill);
+  border-radius: inherit;
+}
+
+/* --- Sizes ------------------------------------------------------------ */
+
+.fetch-progress-bar--small {
+  --_progress-height: 4px; /* @kind other */
+  --_progress-radius: 4px; /* @kind other */
+}
+
+.fetch-progress-bar--medium {
+  --_progress-height: 8px; /* @kind other */
+  --_progress-radius: 4px; /* @kind other */
+}
+
+.fetch-progress-bar--large {
+  --_progress-height: 12px; /* @kind other */
+  --_progress-radius: 12px; /* @kind other */
+}
+
+/* --- Fill color -------------------------------------------------------
+   Always purple-70. The override slot was removed — fills are now a
+   single, consistent accent across the system. */

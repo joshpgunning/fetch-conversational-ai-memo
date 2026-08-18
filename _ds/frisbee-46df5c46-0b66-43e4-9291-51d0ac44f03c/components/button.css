@@ -1,0 +1,211 @@
+/* ==========================================================================
+   Fetch Design System — Button
+   --------------------------------------------------------------------------
+   4 axes: color (purple | white) × type (primary | secondary | tertiary)
+   × size (medium | small) × content (text | icon+text)
+   5 states: default, hover (inferred), pressed, disabled, loading
+   Typography: Sans Small 14 Strong — WeGo Sans Semibold 14/20
+   Requires colors_and_type.css to be loaded.
+   ========================================================================== */
+
+.fetch-btn {
+  --_bg: transparent; /* @kind other */
+  --_fg: var(--fetch-text-primary); /* @kind other */
+  --_bd: transparent; /* @kind other */
+  --_bd-width: 0; /* @kind other */
+
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  min-width: 80px;
+  border-radius: 8px;
+  border: var(--_bd-width) solid var(--_bd);
+  background: var(--_bg);
+  color: var(--_fg);
+  font-family: var(--fetch-font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: var(--fetch-fw-semibold);
+  letter-spacing: 0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 120ms ease-out, color 120ms ease-out, border-color 120ms ease-out, transform 80ms ease-out;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.fetch-btn:focus-visible {
+  outline: 2px solid var(--fetch-purple-70);
+  outline-offset: 2px;
+}
+
+.fetch-btn:active:not(:disabled):not([aria-busy="true"]) {
+  transform: scale(0.98);
+}
+
+.fetch-btn svg,
+.fetch-btn .fetch-btn__icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* ---------- Sizes ------------------------------------------------------- */
+
+/* Medium — primary/secondary */
+.fetch-btn--md { height: 56px; padding: 14px 16px; }
+
+/* Small — primary/secondary — text only */
+.fetch-btn--sm { height: 40px; padding: 10px 16px; }
+/* Small — primary/secondary — with leading icon */
+.fetch-btn--sm.fetch-btn--has-icon { padding: 8px 16px; }
+
+/* Tertiary sizes override above */
+.fetch-btn--tertiary.fetch-btn--md { height: 56px; padding: 4px 8px; }
+.fetch-btn--tertiary.fetch-btn--sm { height: 28px; padding: 4px 8px; }
+.fetch-btn--tertiary svg,
+.fetch-btn--tertiary .fetch-btn__icon { width: 20px; height: 20px; }
+
+/* ---------- PURPLE — light surfaces ------------------------------------- */
+
+/* Primary — filled */
+.fetch-btn--purple.fetch-btn--primary {
+  --_bg: var(--fetch-purple-80); /* @kind other */ /* #6B1CCF */
+  --_fg: var(--fetch-grey-0); /* @kind other */
+}
+.fetch-btn--purple.fetch-btn--primary:hover:not(:disabled):not([aria-busy="true"]) {
+  --_bg: var(--fetch-purple-90); /* @kind other */ /* #5000A0 */
+}
+.fetch-btn--purple.fetch-btn--primary:active:not(:disabled):not([aria-busy="true"]) {
+  --_bg: var(--fetch-purple-90); /* @kind other */ /* #5000A0 */
+}
+.fetch-btn--purple.fetch-btn--primary:disabled {
+  --_bg: var(--fetch-grey-30); /* @kind other */ /* #D8D6DB */
+  --_fg: var(--fetch-grey-50); /* @kind other */ /* #98949F */
+  cursor: not-allowed;
+}
+
+/* Secondary — outlined */
+.fetch-btn--purple.fetch-btn--secondary {
+  --_bg: transparent; /* @kind other */
+  --_fg: var(--fetch-purple-80); /* @kind other */ /* #6B1CCF */
+  --_bd: var(--fetch-purple-80); /* @kind other */
+  --_bd-width: 1px; /* @kind other */
+}
+.fetch-btn--purple.fetch-btn--secondary:hover:not(:disabled):not([aria-busy="true"]) {
+  --_bg: var(--fetch-purple-5); /* @kind other */ /* #FBF9FF */
+}
+.fetch-btn--purple.fetch-btn--secondary:active:not(:disabled):not([aria-busy="true"]) {
+  --_bg: var(--fetch-purple-5); /* @kind other */ /* #FBF9FF */
+  --_fg: var(--fetch-purple-90); /* @kind other */ /* #5000A0 */
+  --_bd: var(--fetch-purple-90); /* @kind other */
+}
+.fetch-btn--purple.fetch-btn--secondary:disabled {
+  --_bg: transparent; /* @kind other */
+  --_fg: var(--fetch-grey-50); /* @kind other */ /* #98949F */
+  --_bd: var(--fetch-grey-50); /* @kind other */
+  cursor: not-allowed;
+}
+
+/* Tertiary — text only */
+.fetch-btn--purple.fetch-btn--tertiary {
+  --_bg: transparent; /* @kind other */
+  --_fg: var(--fetch-purple-80); /* @kind other */ /* #6B1CCF */
+  --_bd-width: 0; /* @kind other */
+  min-width: 0;
+}
+.fetch-btn--purple.fetch-btn--tertiary:hover:not(:disabled):not([aria-busy="true"]) {
+  --_fg: var(--fetch-purple-90); /* @kind other */ /* #5000A0 */
+}
+.fetch-btn--purple.fetch-btn--tertiary:active:not(:disabled):not([aria-busy="true"]) {
+  --_fg: var(--fetch-purple-90); /* @kind other */ /* #5000A0 */
+}
+.fetch-btn--purple.fetch-btn--tertiary:disabled {
+  --_fg: var(--fetch-grey-50); /* @kind other */ /* #98949F */
+  --_bg: transparent; /* @kind other */
+  cursor: not-allowed;
+}
+
+/* ---------- WHITE — dark surfaces --------------------------------------- */
+
+/* Primary */
+.fetch-btn--white.fetch-btn--primary {
+  --_bg: var(--fetch-grey-0); /* @kind other */
+  --_fg: var(--fetch-grey-100); /* @kind other */
+}
+.fetch-btn--white.fetch-btn--primary:hover:not(:disabled):not([aria-busy="true"]) {
+  --_bg: var(--fetch-grey-10); /* @kind other */
+}
+.fetch-btn--white.fetch-btn--primary:active:not(:disabled):not([aria-busy="true"]) {
+  --_bg: var(--fetch-grey-30); /* @kind other */
+}
+.fetch-btn--white.fetch-btn--primary:disabled {
+  --_bg: var(--fetch-twhite-a10); /* @kind other */
+  --_fg: var(--fetch-twhite-a30); /* @kind other */
+  cursor: not-allowed;
+}
+
+/* Secondary */
+.fetch-btn--white.fetch-btn--secondary {
+  --_bg: transparent; /* @kind other */
+  --_fg: var(--fetch-grey-0); /* @kind other */
+  --_bd: var(--fetch-grey-0); /* @kind other */
+  --_bd-width: 1px; /* @kind other */
+}
+.fetch-btn--white.fetch-btn--secondary:hover:not(:disabled):not([aria-busy="true"]) {
+  --_bg: var(--fetch-twhite-a10); /* @kind other */
+}
+.fetch-btn--white.fetch-btn--secondary:active:not(:disabled):not([aria-busy="true"]) {
+  --_bg: var(--fetch-twhite-a10); /* @kind other */
+  --_fg: var(--fetch-grey-30); /* @kind other */
+  --_bd: var(--fetch-grey-30); /* @kind other */
+}
+.fetch-btn--white.fetch-btn--secondary:disabled {
+  --_bg: transparent; /* @kind other */
+  --_fg: var(--fetch-twhite-a30); /* @kind other */
+  --_bd: var(--fetch-twhite-a10); /* @kind other */
+  cursor: not-allowed;
+}
+
+/* Tertiary */
+.fetch-btn--white.fetch-btn--tertiary {
+  --_bg: transparent; /* @kind other */
+  --_fg: var(--fetch-grey-0); /* @kind other */
+  --_bd-width: 0; /* @kind other */
+  min-width: 0;
+}
+.fetch-btn--white.fetch-btn--tertiary:hover:not(:disabled):not([aria-busy="true"]) {
+  --_fg: var(--fetch-grey-30); /* @kind other */
+}
+.fetch-btn--white.fetch-btn--tertiary:active:not(:disabled):not([aria-busy="true"]) {
+  --_fg: var(--fetch-grey-30); /* @kind other */
+}
+.fetch-btn--white.fetch-btn--tertiary:disabled {
+  --_fg: var(--fetch-twhite-a30); /* @kind other */
+  --_bg: transparent; /* @kind other */
+  cursor: not-allowed;
+}
+
+/* ---------- Loading ----------------------------------------------------- */
+
+.fetch-btn[aria-busy="true"] {
+  cursor: progress;
+}
+.fetch-btn[aria-busy="true"] .fetch-btn__icon { display: none; }
+
+.fetch-btn__spinner {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: fetch-btn-spin 700ms linear infinite;
+}
+.fetch-btn--tertiary .fetch-btn__spinner { width: 14px; height: 14px; }
+
+@keyframes fetch-btn-spin { to { transform: rotate(360deg); } }
